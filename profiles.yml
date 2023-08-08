@@ -1,0 +1,13 @@
+octocatalog:
+  outputs:
+    dev:
+      account: ska67070
+      authenticator: externalbrowser
+      database: analytics
+      role: transformer
+      schema: dbt_winnie_octocatalog
+      threads: 16
+      type: snowflake
+      user: WINNIE@FISHTOWNANALYTICS.COM
+      warehouse: transforming
+  target: dev

@@ -1,0 +1,1 @@
+dbt-metricflow[snowflake]~=0.1.0
