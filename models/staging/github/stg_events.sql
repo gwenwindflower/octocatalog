@@ -3,29 +3,41 @@ with
 source as (
 
   select * from {{ source('github', 'github_events') }}
+  where created_at_timestamp >= dateadd('day', -1, current_timestamp)
 
 ),
 
 renamed as (
 
   select
-    id,
-    created_at_timestamp,
-    type,
-    actor_avatar_url,
-    actor_display_login,
-    actor_gravatar_id,
+    --- event
+    id as event_id,
+    type as event_type,
+    public as is_event_public,
+    load_date as event_load_date,
+    created_at_timestamp as event_created_at,
+
+    --- actor
     actor_id,
+    actor_gravatar_id,
     actor_login,
+    actor_display_login,
     actor_url,
+    actor_avatar_url,
+
+    --- repo
     repo_id,
     repo_name,
     repo_url,
-    org_avatar_url,
-    org_gravatar_id,
+
+    --- org
     org_id,
-    org_login,
+    org_gravatar_id,
     org_url,
+    org_login,
+    org_avatar_url,
+
+    -- payload
     payload,
     payload_action,
     payload_description,
@@ -39,46 +51,11 @@ renamed as (
     payload_ref_type,
     payload_issue_id,
     payload_issue,
-    public,
-    load_date,
-    created_at,
     payload_body,
     payload_commit_id,
     payload_created_at,
     payload_user_id,
-    payload_user_login,
-    issue,
-    issue_active_lock_reason,
-    issue_assignee,
-    issue_assignees,
-    issue_author_association,
-    issue_body,
-    issue_closed_at,
-    issue_comments,
-    issue_comments_url,
-    issue_created_at,
-    issue_draft,
-    issue_events_url,
-    issue_html_url,
-    issue_id,
-    issue_labels,
-    issue_labels_url,
-    issue_locked,
-    issue_milestone,
-    issue_node_id,
-    issue_number,
-    issue_performed_via_github_app,
-    issue_pull_request,
-    issue_reactions,
-    issue_repository_url,
-    issue_state,
-    issue_timeline_url,
-    issue_title,
-    issue_updated_at,
-    issue_url,
-    issue_user_id,
-    issue_user_login,
-    issue_user_type
+    payload_user_login
 
   from source
 

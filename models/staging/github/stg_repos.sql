@@ -14,6 +14,7 @@ renamed as (
     first_seen as first_seen_at
 
   from source
+
 )
 
 select * from renamed

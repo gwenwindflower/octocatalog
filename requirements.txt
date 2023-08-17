@@ -1,1 +1,4 @@
 dbt-metricflow[snowflake]~=0.1.0
+requests~=2.31.0
+tqdm~=4.66.1
+duckdb~=0.8.1
