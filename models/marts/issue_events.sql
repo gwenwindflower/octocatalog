@@ -12,12 +12,11 @@ unnest_json as (
   SELECT
     event_id,
     actor_id,
-    payload:issue.id as issue_id,
+    payload -> '$.issue' ->> '$.id' as issue_id,
+    payload ->> '$.action' as issue_action,
     repo_id,
-    actor_login,
     repo_name,
-    payload:action as issue_action,
-    payload:issue.assignees as issue_assignees,
+    actor_login,
     event_created_at
 
   from issue_events
@@ -25,4 +24,3 @@ unnest_json as (
 )
 
 select * from unnest_json
-

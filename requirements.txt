@@ -1,4 +1,6 @@
-dbt-metricflow[snowflake]~=0.1.0
+# dbt-metricflow[duckdb]~=0.1.0
+# waiting on metricflow support for duckdb
+dbt-duckdb~=1.6.0
 requests~=2.31.0
 tqdm~=4.66.1
 duckdb~=0.8.1

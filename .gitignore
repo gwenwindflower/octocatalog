@@ -10,6 +10,5 @@ logs/
 *.db
 *.wal
 
-data/
 *.json
 *.json.gz

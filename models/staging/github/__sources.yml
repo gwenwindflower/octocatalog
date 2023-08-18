@@ -1,8 +1,6 @@
 sources:
   - name: github
-    database: cybersyn_github_archive
-    schema: cybersyn
+    database: github_archive
+    schema: main
     tables:
       - name: github_events
-      - name: github_repos
-      - name: github_stars

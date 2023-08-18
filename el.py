@@ -17,11 +17,6 @@ def validate_date(date_str):
         raise argparse.ArgumentTypeError(f"Invalid date format: {date_str}. Please use the format YYYY-MM-DD.")
 
 
-def load_data(dir_path):
-    print(f'🦆 Loading data from {dir_path} into DuckDB...')
-    con = duckdb.connect(database="github_archive.db", read_only=False)
-    con.execute("CREATE OR REPLACE TABLE github_events AS SELECT * FROM read_json('./*.json.gz', columns={'id': 'STRING', 'type': 'STRING', 'actor': 'JSON', 'repo': 'JSON', 'payload': 'JSON', 'public': 'BOOLEAN', 'created_at': 'TIMESTAMP', 'org': 'JSON'}, format='newline_delimited');")
-
 def download_data(active_datetime):
     url_datetime = datetime.strftime(active_datetime, "%Y-%m-%d-%-H")
     url = f'https://data.gharchive.org/{url_datetime}.json.gz'
@@ -41,6 +36,33 @@ def download_data(active_datetime):
             progress_bar.close()
         else:
             print(f"💩 Crap! {url_datetime} returned status code {response.status_code}.")
+    else:
+        print(f'🎉 Hooray! {url_datetime} already exists. Skipping download.')
+
+
+
+def load_data():
+    print(f'🦆 Loading data into DuckDB...')
+    con = duckdb.connect(database="github_archive.db", read_only=False)
+    con.execute(
+    """
+        CREATE OR REPLACE TABLE github_events AS 
+        SELECT * FROM read_ndjson(
+            './data/*.json.gz',
+            columns={
+                'id': 'VARCHAR',
+                'type': 'VARCHAR',
+                'actor': 'STRUCT(id VARCHAR, login VARCHAR, display_login VARCHAR, gravatar_id VARCHAR, url VARCHAR, avatar_url VARCHAR)',
+                'repo': 'STRUCT(id VARCHAR, name VARCHAR, url VARCHAR)',
+                'payload': 'JSON',
+                'public': 'BOOLEAN', 
+                'created_at': 'TIMESTAMP', 
+                'org': 'STRUCT(id VARCHAR, login VARCHAR, gravatar_id VARCHAR, url VARCHAR, avatar_url VARCHAR)'
+            }
+        );
+    """
+    )
+
 
 parser = argparse.ArgumentParser()
 # TODO Allow hourly granularity
@@ -63,4 +85,4 @@ while active_datetime <= end_datetime:
 
 progress_bar.close()
 
-load_data('./data')
+load_data()
