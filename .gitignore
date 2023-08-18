@@ -3,5 +3,13 @@
 target/
 dbt_packages/
 logs/
-.venv
 
+.venv
+.env
+
+*.db
+*.wal
+
+data/
+*.json
+*.json.gz

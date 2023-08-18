@@ -2,7 +2,6 @@ import argparse
 import os
 import requests
 import duckdb
-import time
 from tqdm import tqdm
 import argparse
 from datetime import datetime, date, timedelta
@@ -19,22 +18,9 @@ def validate_date(date_str):
 
 
 def load_data(dir_path):
-    # print(f'🦆 Loading data from {dir_path} into DuckDB...')
+    print(f'🦆 Loading data from {dir_path} into DuckDB...')
     con = duckdb.connect(database="github_archive.db", read_only=False)
-
-    files = os.listdir(dir_path)
-
-    # for index, file in tqdm(enumerate(files), total=len(files)):
-        # file_path = os.path.join(dir_path, file)
-
-    # con.execute("CREATE OR REPLACE TABLE github_events(id STRING, type STRING, actor MAP(STRING, STRING), repository MAP(STRING, STRING), payload MAP(STRING, STRING), public BOOLEAN, created_at TIMESTAMP, org MAP(STRING, STRING));")
-    # print('created table')
-        # if index == 0:
-        #     con.execute(f"CREATE OR REPLACE TABLE github_events AS SELECT * FROM './data/2023-08-16-0.json.gz';")
-        # else:
-        #     print('woo')
-    # print('now loading')
-    # con.execute("CREATE OR REPLACE TABLE github_events(id STRING, type STRING, actor MAP(STRING, STRING), repository MAP(STRING, STRING), payload MAP(STRING, STRING), public BOOLEAN, created_at TIMESTAMP, org MAP(STRING, STRING)); COPY github_events FROM './data/2023-08-16-0.json';")
+    con.execute("CREATE OR REPLACE TABLE github_events AS SELECT * FROM read_json('./*.json.gz', columns={'id': 'STRING', 'type': 'STRING', 'actor': 'JSON', 'repo': 'JSON', 'payload': 'JSON', 'public': 'BOOLEAN', 'created_at': 'TIMESTAMP', 'org': 'JSON'}, format='newline_delimited');")
 
 def download_data(active_datetime):
     url_datetime = datetime.strftime(active_datetime, "%Y-%m-%d-%-H")
@@ -55,38 +41,26 @@ def download_data(active_datetime):
             progress_bar.close()
         else:
             print(f"💩 Crap! {url_datetime} returned status code {response.status_code}.")
+
+parser = argparse.ArgumentParser()
+# TODO Allow hourly granularity
+parser.add_argument("start_date", help="The start date of the range", default=str(date.today() - timedelta(days=1)) , nargs='?', type=validate_date)
+parser.add_argument("end_date", help="The end date of the range", default=str(date.today()), nargs='?', type=validate_date)
+args = parser.parse_args()
+
+start_datetime = datetime.combine(args.start_date, datetime.min.time())
+end_datetime = datetime.combine(args.end_date, datetime.min.time())
+
+total_hours = int((end_datetime - start_datetime).total_seconds() / 3600)
+progress_bar = tqdm(total=total_hours)
+
+active_datetime = start_datetime
 #
-# parser = argparse.ArgumentParser()
-# # TODO Allow hourly granularity
-# parser.add_argument("start_date", help="The start date of the range", default=str(date.today() - timedelta(days=1)) , nargs='?', type=validate_date)
-# parser.add_argument("end_date", help="The end date of the range", default=str(date.today()), nargs='?', type=validate_date)
-# args = parser.parse_args()
-#
-# start_datetime = datetime.combine(args.start_date, datetime.min.time())
-# end_datetime = datetime.combine(args.end_date, datetime.min.time())
-#
-# total_hours = int((end_datetime - start_datetime).total_seconds() / 3600)
-# # progress_bar = tqdm(total=total_hours)
-#
-# active_datetime = start_datetime
-# #
-# while active_datetime <= end_datetime:
-#     download_data(active_datetime)
-#     progress_bar.update(1)  # Increment the progress bar
-#     active_datetime += timedelta(hours=1)
-#
-# progress_bar.close()
+while active_datetime <= end_datetime:
+    download_data(active_datetime)
+    progress_bar.update(1)
+    active_datetime += timedelta(hours=1)
 
-# load_data('./data')
+progress_bar.close()
 
-
-
-
-
-# THIS IS ALL THAT IS HAPPENING
-
-con = duckdb.connect(database="github_archive.db", read_only=False)
-# con.execute("CREATE OR REPLACE TABLE github_events(id STRING, type STRING, actor JSON, repository JSON, payload JSON, public BOOLEAN, created_at TIMESTAMP, org JSON); COPY github_events FROM './sample-data/2015-01-01-15.json';")
-# i think some fields have changed names maybe? repo -> repository....org exists on some events and not others...so perhaps slurping it up as one row then breaking it out is necessary?
-con.execute("CREATE OR REPLACE TABLE github_events(id STRING, type STRING, actor MAP(STRING, STRING), repository MAP(STRING, STRING), payload MAP(STRING, STRING), public BOOLEAN, created_at TIMESTAMP, org MAP(STRING, STRING)); COPY github_events FROM './sample-data/2015-01-01-15.json';")
-# con.execute("CREATE OR REPLACE TABLE github_events(event JSON); COPY github_events FROM './sample-data/2015-01-01-15.json';")
+load_data('./data')
