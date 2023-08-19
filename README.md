@@ -1,3 +1,5 @@
+![yogitocat](https://github.com/gwenwindflower/octocatalog/assets/91998347/08bd4d86-496e-443e-b79e-029962a47b1f)
+
 Chunky and noisy,
 but with stars in their black feathers,
 they spring from the telephone wire
