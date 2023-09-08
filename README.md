@@ -1,46 +1,9 @@
-![yogitocat](https://github.com/gwenwindflower/octocatalog/assets/91998347/08bd4d86-496e-443e-b79e-029962a47b1f)
+# Welcome to the `octocatalog`
 
-Chunky and noisy,
-but with stars in their black feathers,
-they spring from the telephone wire
-and instantly
+This is a data-platform-in-a-box[^1] based on DuckDB + dbt + Evidence. It offers a simple script to extract and load (EL) data from the [GitHub Archive](https://www.gharchive.org/), a dbt project built on top of this data inside a DuckDB database, and BI tooling via Evidence to analyze and present the data.
 
-they are acrobats
-in the freezing wind.
-And now, in the theater of air,
-they swing over buildings,
+It runs completely local or inside of a devcontainer. I call it the Quack Stack.
 
-dipping and rising;
-they float like one stippled star
-that opens,
-becomes for a moment fragmented,
+![kim was right](https://github.com/gwenwindflower/octocatalog/assets/91998347/adb3fb70-c666-4d54-9e0c-86600692603b)
 
-then closes again;
-and you watch
-and you try
-but you simply can't imagine
-
-how they do it
-with no articulated instruction, no pause,
-only the silent confirmation
-that they are this notable thing,
-
-this wheel of many parts, that can rise and spin
-over and over again,
-full of gorgeous life.
-
-Ah, world, what lessons you prepare for us,
-even in the leafless winter,
-even in the ashy city.
-I am thinking now
-of grief, and of getting past it;
-
-I feel my boots
-trying to leave the ground,
-I feel my heart
-pumping hard. I want
-
-to think again of dangerous and noble things.
-I want to be light and frolicsome.
-I want to be improbable beautiful and afraid of nothing,
-as though I had wings.
+[^1]: Based on the patterns developed by Jacob Matson for the original [MDS-in-a-box](https://duckdb.org/2022/10/12/modern-data-stack-in-a-box.html)https://duckdb.org/2022/10/12/modern-data-stack-in-a-box.html.
