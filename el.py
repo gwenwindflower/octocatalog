@@ -54,12 +54,17 @@ def download_data(active_datetime):
 
 
 def load_data():
-    spinner = Halo(text="🦆 Loading data into DuckDB...", spinner="dots")
-    spinner.start()
+
     if args.prod:
+        spinner_text = "🦆☁️  Loading data into MotherDuck..."
         connection = "md:github_archive"
     else:
+        spinner_text = "🦆💾 Loading data into DuckDB..."
         connection = "./reports/github_archive.db"
+    
+    spinner = Halo(text=spinner_text, spinner="dots")
+    spinner.start()
+    
     con = duckdb.connect(database=connection, read_only=False)
     con.execute(
         """
