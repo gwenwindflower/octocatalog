@@ -19,3 +19,11 @@ tasks:
   transform-prod:
     cmds:
       - dbt build --target prod
+  elt:
+    cmds:
+      - python3 el.py -el
+      - dbt build
+  elt-prod:
+    cmds:
+      - python3 el.py -elp
+      - dbt build --target prod

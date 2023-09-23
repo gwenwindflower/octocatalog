@@ -114,17 +114,17 @@ parser.add_argument(
     type=validate_date,
 )
 parser.add_argument(
-    "-l",
-    "--load",
-    help="Load data already existing from the data directory into DuckDB",
-    default=True,
-    action="store_true",
-)
-parser.add_argument(
     "-e",
     "--extract",
     help="Just pull data from the GitHub Archive don't load it into DuckDB",
-    default=True,
+    default=False,
+    action="store_true",
+)
+parser.add_argument(
+    "-l",
+    "--load",
+    help="Load data already existing from the data directory into DuckDB",
+    default=False,
     action="store_true",
 )
 parser.add_argument(
