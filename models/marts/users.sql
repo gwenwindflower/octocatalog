@@ -56,6 +56,7 @@ pull_most_recent_user_state as (
         actor_avatar_url,
 
     from rank_user_state_recency
+
     where user_state_recency_rank = 1
 
 )

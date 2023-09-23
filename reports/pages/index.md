@@ -23,6 +23,13 @@ title: Github Archive Analysis
   title = "Issues per Day"
 />
 
+<BarChart
+  data={repos_with_most_unique_contributors}
+  x="repo_name"
+  y="number_of_contributors"
+  title = "Repos with Most Unique Contributors"
+/>
+
 ## Queries
 
 ```sql top_users_by_pull_requests
@@ -53,4 +60,17 @@ select
 from issue_events
 group by 1
 order by 1
+```
+
+```sql repos_with_most_unique_contributors
+select
+  repos.repo_name,
+  count(distinct pull_request_events.user_id) as number_of_contributors,
+from pull_request_events
+left join repos on repos.repo_id = pull_request_events.repo_id
+where
+  pull_request_events.user_login not like ('%[bot]') and
+  pull_request_events.pull_request_merged_at is not null
+group by 1
+having number_of_contributors > 2
 ```
