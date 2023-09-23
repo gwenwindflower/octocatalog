@@ -23,7 +23,7 @@ You can also manually run the `el.py` script with `python3 el.py [args]` to pull
 The args are:
 
 ```shell
-python3 el.py [start_date in YYYY-MM-DD format] [end_date in YYYY-MM-DD format] [-e --extract Run the extract part only] [-l --load Run the load part only]
+python3 el.py [start_date in YYYY-MM-DD format, defaults to yesterday] [end_date in YYYY-MM-DD format, defaults to today] [-e --extract Run the extract part only] [-l --load Run the load part only]
 ```
 
 The `-e` and `-l` flags default to true and will run both parts of the script if not specified, so `-el` is the same as not specifying any flags.
