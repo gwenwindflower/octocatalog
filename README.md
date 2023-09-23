@@ -28,6 +28,8 @@ python3 el.py [start_date in YYYY-MM-DD format] [end_date in YYYY-MM-DD format] 
 
 The `-e` and `-l` flags default to true and will run both parts of the script if not specified, so `-el` is the same as not specifying any flags.
 
+In order for Evidence to work the DuckDB file needs to be built into the `./reports/` directory. If you're looking to access it via the DuckDB CLI you can find it at `./reports/gharchive.db`.
+
 ![kim was right](https://github.com/gwenwindflower/octocatalog/assets/91998347/adb3fb70-c666-4d54-9e0c-86600692603b)
 
 [^1]: Based on the patterns developed by Jacob Matson for the original [MDS-in-a-box](https://duckdb.org/2022/10/12/modern-data-stack-in-a-box.html)https://duckdb.org/2022/10/12/modern-data-stack-in-a-box.html.
