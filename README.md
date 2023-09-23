@@ -90,6 +90,7 @@ So far we've modeled:
 - [x] Issues
 - [x] Pull Requests
 - [x] Users
+- [x] Repos
 - [ ] Stars
 - [ ] Forks
 - [ ] Comments
