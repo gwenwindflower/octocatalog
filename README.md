@@ -1,7 +1,5 @@
 # 😸 Welcome to the `octocatalog` 💾
 
-![Welcome video for the repo](https://www.loom.com/share/989e99af8444478fbbcf15e477bc293c?sid=b838adb5-a26c-4b56-a726-3225e0db2394)
-
 This is a data-platform-in-a-box[^1] based on DuckDB + dbt + Evidence. It offers a simple script to extract and load (EL) data from the [GitHub Archive](https://www.gharchive.org/), a dbt project built on top of this data inside a DuckDB database, and BI tooling via Evidence to analyze and present the data.
 
 It runs completely local or inside of a devcontainer. Some (me) call it the Quack Stack.
@@ -33,5 +31,22 @@ The `-e` and `-l` flags default to true and will run both parts of the script if
 In order for Evidence to work the DuckDB file needs to be built into the `./reports/` directory. If you're looking to access it via the DuckDB CLI you can find it at `./reports/gharchive.db`.
 
 ![kim was right](https://github.com/gwenwindflower/octocatalog/assets/91998347/adb3fb70-c666-4d54-9e0c-86600692603b)
+
+---
+
+## Modeling the event data
+
+Schemas for the event data [are documented here](https://docs.github.com/en/rest/overview/github-event-types?apiVersion=2022-11-28).
+
+So far we've modeled:
+- [x] Issues
+- [x] Pull Requests
+- [ ] Users
+- [ ] Stars
+- [ ] Forks
+- [ ] Comments
+- [ ] Pushes
+
+![5d3aea93a0c5762db6cbee9cf55e25b5](https://github.com/gwenwindflower/octocatalog/assets/91998347/67494c8e-cf08-4d46-8814-b97911797ebf)
 
 [^1]: Based on the patterns developed by Jacob Matson for the original [MDS-in-a-box](https://duckdb.org/2022/10/12/modern-data-stack-in-a-box.html)https://duckdb.org/2022/10/12/modern-data-stack-in-a-box.html.
