@@ -56,7 +56,11 @@ def download_data(active_datetime):
 def load_data():
     spinner = Halo(text="🦆 Loading data into DuckDB...", spinner="dots")
     spinner.start()
-    con = duckdb.connect(database="./reports/github_archive.db", read_only=False)
+    if args.prod:
+        connection = "md:github_archive"
+    else:
+        connection = "./reports/github_archive.db"
+    con = duckdb.connect(database=connection, read_only=False)
     con.execute(
         """
         CREATE SCHEMA IF NOT EXISTS raw;
@@ -121,6 +125,13 @@ parser.add_argument(
     "--extract",
     help="Just pull data from the GitHub Archive don't load it into DuckDB",
     default=True,
+    action="store_true",
+)
+parser.add_argument(
+    "-p",
+    "--prod",
+    help="Run in production mode connected to MotherDuck",
+    default=False,
     action="store_true",
 )
 args = parser.parse_args()

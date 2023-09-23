@@ -3,4 +3,7 @@ octocatalog:
     dev:
       type: duckdb
       path: ./reports/github_archive.db
+    prod:
+      type: duckdb
+      path: md:octocatalog
   target: dev
