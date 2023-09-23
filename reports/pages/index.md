@@ -36,7 +36,7 @@ title: Github Archive Analysis
 select
   user_login,
   count(distinct pull_request_id) as number_of_prs,
-from pull_request_events
+from octocatalog.pull_request_events
 where user_login not like ('%[bot]')
 group by 1
 order by 2 desc
@@ -47,7 +47,7 @@ limit 10
 select
   repo_name,
   count(distinct issue_id) as number_of_issues,
-from issue_events
+from octocatalog.issue_events
 group by 1
 having number_of_issues > 2
 order by 2 desc
@@ -57,7 +57,7 @@ order by 2 desc
 select
   date_trunc('day', issue_created_at) as created_date,
   count(distinct issue_id) as number_of_issues,
-from issue_events
+from octocatalog.issue_events
 group by 1
 order by 1
 ```
@@ -66,8 +66,8 @@ order by 1
 select
   repos.repo_name,
   count(distinct pull_request_events.user_id) as number_of_contributors,
-from pull_request_events
-left join repos on repos.repo_id = pull_request_events.repo_id
+from octocatalog.pull_request_events
+left join octocatalog.repos on repos.repo_id = pull_request_events.repo_id
 where
   pull_request_events.user_login not like ('%[bot]') and
   pull_request_events.pull_request_merged_at is not null
