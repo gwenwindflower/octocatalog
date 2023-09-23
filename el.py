@@ -3,6 +3,7 @@ import os
 import requests
 import duckdb
 from tqdm import tqdm
+from halo import Halo
 from datetime import datetime, date, timedelta
 
 
@@ -53,8 +54,9 @@ def download_data(active_datetime):
 
 
 def load_data():
-    print("🦆 Loading data into DuckDB...")
-    con = duckdb.connect(database="github_archive.db", read_only=False)
+    spinner = Halo(text="🦆 Loading data into DuckDB...", spinner="dots")
+    spinner.start()
+    con = duckdb.connect(database="./reports/github_archive.db", read_only=False)
     con.execute(
         """
         CREATE SCHEMA IF NOT EXISTS raw;
@@ -87,6 +89,8 @@ def load_data():
         );
     """
     )
+    con.close()
+    spinner.succeed("🦆 Loading data into DuckDB... Done!")
 
 
 parser = argparse.ArgumentParser()
@@ -105,7 +109,18 @@ parser.add_argument(
     nargs="?",
     type=validate_date,
 )
+parser.add_argument(
+    "-l",
+    "--load-only",
+    help="Load data already existing from the data directory into DuckDB",
+    default=False,
+    action="store_true",
+)
 args = parser.parse_args()
+
+if args.load_only:
+    load_data()
+    exit()
 
 start_datetime = datetime.combine(args.start_date, datetime.min.time())
 end_datetime = datetime.combine(args.end_date, datetime.min.time())
@@ -114,7 +129,7 @@ total_hours = int((end_datetime - start_datetime).total_seconds() / 3600)
 progress_bar = tqdm(total=total_hours)
 
 active_datetime = start_datetime
-#
+
 while active_datetime <= end_datetime:
     download_data(active_datetime)
     progress_bar.update(1)

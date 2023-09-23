@@ -2,5 +2,5 @@ octocatalog:
   outputs:
     dev:
       type: duckdb
-      path: ./github_archive.db
+      path: ./reports/github_archive.db
   target: dev
