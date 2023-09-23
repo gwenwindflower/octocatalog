@@ -111,30 +111,35 @@ parser.add_argument(
 )
 parser.add_argument(
     "-l",
-    "--load-only",
+    "--load",
     help="Load data already existing from the data directory into DuckDB",
-    default=False,
+    default=True,
+    action="store_true",
+)
+parser.add_argument(
+    "-e",
+    "--extract",
+    help="Just pull data from the GitHub Archive don't load it into DuckDB",
+    default=True,
     action="store_true",
 )
 args = parser.parse_args()
 
-if args.load_only:
+if args.extract:
+    start_datetime = datetime.combine(args.start_date, datetime.min.time())
+    end_datetime = datetime.combine(args.end_date, datetime.min.time())
+
+    total_hours = int((end_datetime - start_datetime).total_seconds() / 3600)
+    progress_bar = tqdm(total=total_hours)
+
+    active_datetime = start_datetime
+
+    while active_datetime <= end_datetime:
+        download_data(active_datetime)
+        progress_bar.update(1)
+        active_datetime += timedelta(hours=1)
+
+    progress_bar.close()
+
+if args.load:
     load_data()
-    exit()
-
-start_datetime = datetime.combine(args.start_date, datetime.min.time())
-end_datetime = datetime.combine(args.end_date, datetime.min.time())
-
-total_hours = int((end_datetime - start_datetime).total_seconds() / 3600)
-progress_bar = tqdm(total=total_hours)
-
-active_datetime = start_datetime
-
-while active_datetime <= end_datetime:
-    download_data(active_datetime)
-    progress_bar.update(1)
-    active_datetime += timedelta(hours=1)
-
-progress_bar.close()
-
-load_data()

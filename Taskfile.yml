@@ -3,10 +3,10 @@ version: "3"
 tasks:
   extract:
     cmds:
-      - python3 el.py --extract-only
+      - python3 el.py -e
   load:
     cmds:
-      - python3 el.py --load-only
+      - python3 el.py -l
   el:
     cmds:
       - python3 el.py
