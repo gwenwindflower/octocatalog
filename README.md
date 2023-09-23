@@ -2,13 +2,52 @@
 
 This is a data-platform-in-a-box[^1] based on DuckDB + dbt + Evidence. It offers a simple script to extract and load (EL) data from the [GitHub Archive](https://www.gharchive.org/), a dbt project built on top of this data inside a DuckDB database, and BI tooling via Evidence to analyze and present the data.
 
-It runs completely local or inside of a devcontainer. Some (me) call it the Quack Stack.
+It runs completely local or inside of a devcontainer, but can also run on MotherDuck as a production target. Some (me) call it the Quack Stack.
 
-There are some basic tasks included using my preferred task runner [task](https://taskfile.dev/#/). You can install it on macOS with:
+## Task runner
+There are some basic tasks included using my preferred task runner [task](https://taskfile.dev/#/). This is optional for your convenience, you can also [run the `el.py` script directly with Python](#running-the-el-script-directly). You can install it with most package managers:
 
-```shell
-brew install go-task
-```
+<details>
+
+  <summary>macOS</summary>
+  <br>
+  Using Homebrew:
+  
+  ```shell
+  brew install go-task
+  ```
+
+</details>
+<details>
+  
+  <summary>Windows</summary>
+  <br>
+  Using Chocolatey:
+  
+  ```shell
+  choco install go-task
+  ```
+
+  Using Scoop:
+  
+  ```shell
+  scoop install task
+  ```
+
+</details>
+<details>
+  
+  <summary>Linux</summary>
+  <br>
+  Using Yay:
+  
+  ```shell
+  yay -S go-task-bin
+  ```
+
+</details>
+
+More install methods are [detailed in the Task docs](https://taskfile.dev/installation/).
 
 Tasks included are:
 
@@ -19,6 +58,7 @@ task transform # run the dbt transformations
 task [*]-prod # all tasks can be run in a 'prod-mode' against a MotherDuck cloud warehouse
 ```
 
+## Running the EL script directly
 You can also manually run the `el.py` script with `python3 el.py [args]` to pull a custom date range. Please note that the GitHub Archive is only available from 2011-02-12 to the present day and that being event data it is very large. Running more than a few days or weeks will push the limits of DuckDB (that's part of the interest and goal of this project though so have at).
 
 The args are:
@@ -35,7 +75,7 @@ python3 el.py -lp # load any data into the production database
 python3 el.py 2023-09-20 2023-09-23 -elp # extract and load 3 days of data into the production database
 ```
 
-In order for Evidence to work the DuckDB file needs to be built into the `./reports/` directory. If you're looking to access it via the DuckDB CLI you can find it at `./reports/gharchive.db`.
+In order for Evidence to work the DuckDB file needs to be built into the `./reports/` directory. If you're looking to access it via the DuckDB CLI you can find it at `./reports/github_archive.db`.
 
 ![kim was right](https://github.com/gwenwindflower/octocatalog/assets/91998347/adb3fb70-c666-4d54-9e0c-86600692603b)
 
