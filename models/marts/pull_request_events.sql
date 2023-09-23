@@ -18,6 +18,18 @@ unnest_json as (
         repo_name,
         actor_login,
         event_created_at,
+        (
+            payload
+            -> '$.pull_request'
+            ->> '$.created_at'
+        )::timestamp as pull_request_created_at,
+        (
+            payload -> '$.pull_request' ->> '$.closed_at'
+        )::timestamp as pull_request_closed_at,
+        (
+            payload -> '$.pull_request' ->> '$.merged_at'
+        )::timestamp as pull_request_merged_at,
+        payload -> '$.pull_request' ->> '$.commits' as pull_request_commits,
         payload ->> '$.action' as pull_request_action,
         payload ->> '$.number' as pull_request_number,
         payload ->> '$.changes' as pull_request_changes,
@@ -29,13 +41,7 @@ unnest_json as (
         payload -> '$.pull_request' ->> '$.body' as pull_request_body,
         payload
         -> '$.pull_request'
-        ->> '$.created_at' as pull_request_created_at,
-        payload
-        -> '$.pull_request'
         ->> '$.updated_at' as pull_request_updated_at,
-        payload -> '$.pull_request' ->> '$.closed_at' as pull_request_closed_at,
-        payload -> '$.pull_request' ->> '$.merged_at' as pull_request_merged_at,
-        payload -> '$.pull_request' ->> '$.commits' as pull_request_commits,
         payload
         -> '$.pull_request'
         ->> '$.commits' as pull_request_commits_count,

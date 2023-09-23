@@ -18,6 +18,9 @@ unnest_json as (
         repo_name,
         actor_login,
         event_created_at,
+        (
+            payload -> '$.issue' ->> '$.created_at'
+        )::timestamp as issue_created_at,
         payload ->> '$.action' as issue_action,
         payload -> '$.issue' ->> '$.id' as issue_id,
         payload -> '$.issue' ->> '$.url' as issue_url,
