@@ -5,8 +5,11 @@ dbt_packages/
 logs/
 
 .venv
+venv
 .env
+env
 
+*.duckdb
 *.db
 *.wal
 
