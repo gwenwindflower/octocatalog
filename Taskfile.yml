@@ -10,7 +10,7 @@ tasks:
   load:
     cmds:
       - python3 el.py -l
-  load:
+  load-prod:
     cmds:
       - python3 el.py -lp
   transform:
@@ -18,18 +18,4 @@ tasks:
       - dbt build
   transform-prod:
     cmds:
-      - dbt build --target prod
-  el:
-    cmds:
-      - python3 el.py
-  el-prod:
-    cmds:
-      - python3 el.py -p
-  elt:
-    cmds:
-      - python3 el.py
-      - dbt build
-  elt-prod:
-    cmds:
-      - python3 el.py -p
       - dbt build --target prod
