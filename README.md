@@ -15,7 +15,8 @@ Tasks included are:
 ```shell
 task extract # pull data from github archive for the past day into the data/ directory
 task load # load data from the data/ directory into duckdb
-task el # run both extract and load
+task transform # run the dbt transformations
+task [*]-prod # all tasks can be run in a 'prod-mode' against a MotherDuck cloud warehouse
 ```
 
 You can also manually run the `el.py` script with `python3 el.py [args]` to pull a custom date range. Please note that the GitHub Archive is only available from 2011-02-12 to the present day and that being event data it is very large. Running more than a few days or weeks will push the limits of DuckDB (that's part of the interest and goal of this project though so have at).
