@@ -5,7 +5,7 @@ This is a data-platform-in-a-box[^1] based on DuckDB + dbt + Evidence. It offers
 It runs completely local or inside of a devcontainer, but can also run on MotherDuck as a production target. Some (me) call it the Quack Stack.
 
 ## Task runner
-There are some basic tasks included using my preferred task runner [task](https://taskfile.dev/#/). This is optional for your convenience, you can also [run the `el.py` script directly with Python](#running-the-el-script-directly). You can install it with most package managers:
+There are some basic tasks included using my preferred task runner [Task](https://taskfile.dev/#/). This is optional for your convenience, you can also [run the `el.py` script directly with Python](#running-the-el-script-directly). You can install it with most package managers:
 
 <details>
 
