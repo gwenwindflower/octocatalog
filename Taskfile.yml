@@ -4,9 +4,32 @@ tasks:
   extract:
     cmds:
       - python3 el.py -e
+  extract-prod:
+    cmds:
+      - python3 el.py -ep
   load:
     cmds:
       - python3 el.py -l
+  load:
+    cmds:
+      - python3 el.py -lp
+  transform:
+    cmds:
+      - dbt build
+  transform-prod:
+    cmds:
+      - dbt build --target prod
   el:
     cmds:
       - python3 el.py
+  el-prod:
+    cmds:
+      - python3 el.py -p
+  elt:
+    cmds:
+      - python3 el.py
+      - dbt build
+  elt-prod:
+    cmds:
+      - python3 el.py -p
+      - dbt build --target prod
