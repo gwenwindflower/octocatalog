@@ -46,7 +46,8 @@ def load_data():
     con = duckdb.connect(database="github_archive.db", read_only=False)
     con.execute(
     """
-        CREATE OR REPLACE TABLE github_events AS 
+        CREATE SCHEMA IF NOT EXISTS raw;
+        CREATE OR REPLACE TABLE raw.github_events AS 
         SELECT * FROM read_ndjson(
             './data/*.json.gz',
             columns={

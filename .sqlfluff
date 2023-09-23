@@ -1,0 +1,8 @@
+[sqlfluff]
+dialect = duckdb
+
+[sqlfluff:indentation]
+tab_space_size = 4
+
+[sqlfluff:rules:capitalisation.keywords]
+capitalisation_policy = lower

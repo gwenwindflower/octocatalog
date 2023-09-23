@@ -32,3 +32,5 @@ models:
   octocatalog:
     marts:
       +materialized: table
+    staging:
+      +schema: staging

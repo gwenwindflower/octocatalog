@@ -1,6 +1,6 @@
 sources:
   - name: github
     database: github_archive
-    schema: main
+    schema: raw
     tables:
       - name: github_events

@@ -2,24 +2,34 @@ with
 
 issue_events as (
 
-  select * from {{ ref('stg_events') }}
-  where event_type = 'IssuesEvent'
+    select * from {{ ref('stg_events') }}
+
+    where event_type = 'IssuesEvent'
 
 ),
 
 unnest_json as (
 
-  SELECT
-    event_id,
-    actor_id,
-    payload -> '$.issue' ->> '$.id' as issue_id,
-    payload ->> '$.action' as issue_action,
-    repo_id,
-    repo_name,
-    actor_login,
-    event_created_at
+    select
+        event_id,
+        actor_id,
+        payload,
+        repo_id,
+        repo_name,
+        actor_login,
+        event_created_at,
+        payload ->> '$.action' as issue_action,
+        payload -> '$.issue' ->> '$.id' as issue_id,
+        payload -> '$.issue' ->> '$.url' as issue_url,
+        payload -> '$.issue' ->> '$.repository_url' as issue_repo_url,
+        payload -> '$.issue' ->> '$.state' as issue_state,
+        payload -> '$.issue' ->> '$.state_reason' as issue_state_reason,
+        payload -> '$.issue' ->> '$.body' as issue_body,
+        payload ->> '$.changes' as issue_changes,
+        payload ->> '$.label' as issue_label,
+        payload ->> '$.assignee' as issue_assignee
 
-  from issue_events
+    from issue_events
 
 )
 
