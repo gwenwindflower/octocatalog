@@ -30,8 +30,6 @@ title: Github Archive Analysis
   title = "Repos with Most Unique Contributors"
 />
 
-## Queries
-
 ```sql top_users_by_pull_requests
 select
   user_login,
