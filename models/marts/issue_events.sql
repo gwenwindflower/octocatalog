@@ -2,7 +2,7 @@ with
 
 issue_events as (
 
-    select * from {{ ref('stg_events') }}
+    select *, from {{ ref('stg_events') }}
 
     where event_type = 'IssuesEvent'
 
@@ -30,10 +30,10 @@ unnest_json as (
         payload -> '$.issue' ->> '$.body' as issue_body,
         payload ->> '$.changes' as issue_changes,
         payload ->> '$.label' as issue_label,
-        payload ->> '$.assignee' as issue_assignee
+        payload ->> '$.assignee' as issue_assignee,
 
     from issue_events
 
 )
 
-select * from unnest_json
+select *, from unnest_json

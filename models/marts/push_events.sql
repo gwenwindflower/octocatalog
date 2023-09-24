@@ -2,7 +2,7 @@ with
 
 push_events as (
 
-    select * from {{ ref('stg_events') }}
+    select *, from {{ ref('stg_events') }}
 
     where event_type in ('PushEvent')
 
@@ -27,4 +27,4 @@ unnest_json as (
 
 )
 
-select * from unnest_json
+select *, from unnest_json

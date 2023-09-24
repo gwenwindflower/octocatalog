@@ -19,7 +19,7 @@ distill_user_states_from_events as (
         actor_display_login,
         actor_url,
         actor_avatar_url,
-        max(event_created_at) as user_state_last_seen_at
+        max(event_created_at) as user_state_last_seen_at,
 
     from {{ ref('stg_events') }}
 
@@ -39,7 +39,7 @@ rank_user_state_recency as (
         row_number() over (
             partition by actor_id
             order by user_state_last_seen_at desc
-        ) as user_state_recency_rank
+        ) as user_state_recency_rank,
 
     from distill_user_states_from_events
 
@@ -53,7 +53,7 @@ pull_most_recent_user_state as (
         actor_login,
         actor_display_login,
         actor_url,
-        actor_avatar_url
+        actor_avatar_url,
 
     from rank_user_state_recency
 
@@ -61,4 +61,4 @@ pull_most_recent_user_state as (
 
 )
 
-select * from pull_most_recent_user_state
+select *, from pull_most_recent_user_state
