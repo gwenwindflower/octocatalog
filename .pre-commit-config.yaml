@@ -20,9 +20,9 @@ repos:
     rev: 23.9.1
     hooks:
       - id: black
-  # - repo: https://github.com/sqlfluff/sqlfluff
-  #   rev: 2.3.2
-  #   hooks:
-  #     - id: sqlfluff-fix
-  #       additional_dependencies:
-  #         ["dbt-metricflow[duckdb]~=0.3.0", "sqlfluff-templater-dbt"]
+  - repo: https://github.com/sqlfluff/sqlfluff
+    rev: 2.3.2
+    hooks:
+      - id: sqlfluff-fix
+        additional_dependencies:
+          ["dbt-metricflow[duckdb]~=0.3.0", "sqlfluff-templater-dbt"]
