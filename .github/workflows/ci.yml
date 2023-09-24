@@ -22,7 +22,7 @@ jobs:
       - name: Load data-test
         run: python3 el.py -lc
       - name: Run transformations        
-        run: dbt build
+        run: dbt deps && dbt build
       - name: Build Evidence
         run: npm run build --prefix ./reports
       
