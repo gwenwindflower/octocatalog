@@ -16,6 +16,6 @@ jobs:
       - name: Install requirements
         run: python3 -m pip install -r requirements.txt
       - name: Run EL
-        run: python3 el.py -c
+        run: python3 el.py -lc
       - name: Run T
         run: dbt deps && dbt build
