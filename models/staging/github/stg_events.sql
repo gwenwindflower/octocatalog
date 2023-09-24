@@ -2,7 +2,7 @@ with
 
 source as (
 
-    select * from {{ source('octocatalog', 'github_events') }}
+    select *, from {{ source('octocatalog', 'github_events') }}
 
 ),
 
@@ -36,10 +36,10 @@ renamed as (
         org['login'] as org_login,
         org['gravatar_id'] as org_gravatar_id,
         org['url'] as org_url,
-        org['avatar_url'] as org_avatar_url
+        org['avatar_url'] as org_avatar_url,
 
     from source
 
 )
 
-select * from renamed
+select *, from renamed

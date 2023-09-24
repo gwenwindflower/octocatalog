@@ -2,7 +2,7 @@ with
 
 pull_request_events as (
 
-    select * from {{ ref('stg_events') }}
+    select *, from {{ ref('stg_events') }}
 
     where event_type = 'PullRequestEvent'
 
@@ -53,10 +53,10 @@ unnest_json as (
         payload
         -> '$.pull_request'
         -> '$.repo'
-        ->> '$.full_name' as repo_full_name
+        ->> '$.full_name' as repo_full_name,
 
     from pull_request_events
 
 )
 
-select * from unnest_json
+select *, from unnest_json
