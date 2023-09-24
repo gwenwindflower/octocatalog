@@ -54,6 +54,10 @@ def download_data(active_datetime):
 
 
 def load_data():
+    if args.check:
+        data_path = "data-test"
+    else:
+        data_path = "data"
 
     if args.prod:
         spinner_text = "🦆☁️  Loading data into MotherDuck..."
@@ -71,7 +75,9 @@ def load_data():
         CREATE SCHEMA IF NOT EXISTS raw;
         CREATE OR REPLACE TABLE raw.github_events AS 
         SELECT * FROM read_ndjson(
-            './data/*.json.gz',
+        """
+        "'" + data_path + '/*.json.gz' + "',"
+        """
             columns={
                 'id': 'VARCHAR',
                 'type': 'VARCHAR',
@@ -96,7 +102,7 @@ def load_data():
                 )'
             }
         );
-    """
+        """
     )
     con.close()
     spinner.succeed("🦆 Loading data into DuckDB... Done!")
@@ -136,6 +142,13 @@ parser.add_argument(
     "-p",
     "--prod",
     help="Run in production mode connected to MotherDuck",
+    default=False,
+    action="store_true",
+)
+parser.add_argument(
+    "-c",
+    "--check",
+    help="Run in CI mode using data in data-test directory",
     default=False,
     action="store_true",
 )
