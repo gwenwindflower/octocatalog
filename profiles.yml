@@ -2,7 +2,7 @@ octocatalog:
   outputs:
     dev:
       type: duckdb
-      path: ./reports/github_archive.db
+      path: ./reports/octocatalog.db
     prod:
       type: duckdb
       path: md:octocatalog
