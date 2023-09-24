@@ -15,9 +15,9 @@ jobs:
           python-version: "3.10.x"
       - name: Install requirements
         run: python3 -m pip install -r requirements.txt
-      - name: Lint SQL
-        run: sqlfluff lint --format github-annotation-native
       - name: Run EL
         run: python3 el.py -lc
       - name: Run T
         run: dbt deps && dbt build
+      - name: Lint SQL
+        run: sqlfluff lint models --format github-annotation-native
