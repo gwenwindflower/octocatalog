@@ -10,9 +10,9 @@ Check out the docs for [alternative install methods](https://docs.evidence.dev/g
 
 ```shell
 npx degit evidence-dev/template my-project
-cd my-project 
-npm install 
-npm run dev 
+cd my-project
+npm install
+npm run dev
 ```
 
 Once you've launched Evidence, this project includes a short tutorial to help you get started.

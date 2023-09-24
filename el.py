@@ -1,10 +1,11 @@
 import argparse
 import os
-import requests
+from datetime import date, datetime, timedelta
+
 import duckdb
-from tqdm import tqdm
+import requests
 from halo import Halo
-from datetime import datetime, date, timedelta
+from tqdm import tqdm
 
 
 def validate_date(date_str):
@@ -65,18 +66,18 @@ def load_data():
     else:
         spinner_text = "🦆💾 Loading data into DuckDB..."
         connection = "./reports/github_archive.db"
-    
+
     spinner = Halo(text=spinner_text, spinner="dots")
     spinner.start()
-    
+
     con = duckdb.connect(database=connection, read_only=False)
     con.execute(
         """
         CREATE SCHEMA IF NOT EXISTS raw;
-        CREATE OR REPLACE TABLE raw.github_events AS 
+        CREATE OR REPLACE TABLE raw.github_events AS
         SELECT * FROM read_ndjson(
         """
-        "'" + data_path + '/*.json.gz' + "',"
+        "'" + data_path + "/*.json.gz" + "',"
         """
             columns={
                 'id': 'VARCHAR',
@@ -91,8 +92,8 @@ def load_data():
                 )',
                 'repo': 'STRUCT(id VARCHAR, name VARCHAR, url VARCHAR)',
                 'payload': 'JSON',
-                'public': 'BOOLEAN', 
-                'created_at': 'TIMESTAMP', 
+                'public': 'BOOLEAN',
+                'created_at': 'TIMESTAMP',
                 'org': 'STRUCT(
                     id VARCHAR,
                     login VARCHAR,
