@@ -50,7 +50,6 @@ unnest_json as (
         ->> '$.comments' as pull_request_comment_count,
         payload -> '$.pull_request' -> '$.user' ->> '$.login' as user_login,
         payload -> '$.pull_request' -> '$.user' ->> '$.id' as user_id,
-        payload -> '$.pull_request' -> '$.repo' ->> '$.id' as repo_id,
         payload
         -> '$.pull_request'
         -> '$.repo'

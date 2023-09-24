@@ -15,35 +15,35 @@ There are some basic tasks included using my preferred task runner [Task](https:
   <summary>macOS</summary>
   <br>
   Using Homebrew:
-  
+
   ```shell
   brew install go-task
   ```
 
 </details>
 <details>
-  
+
   <summary>Windows</summary>
   <br>
   Using Chocolatey:
-  
+
   ```shell
   choco install go-task
   ```
 
   Using Scoop:
-  
+
   ```shell
   scoop install task
   ```
 
 </details>
 <details>
-  
+
   <summary>Linux</summary>
   <br>
   Using Yay:
-  
+
   ```shell
   yay -S go-task-bin
   ```
