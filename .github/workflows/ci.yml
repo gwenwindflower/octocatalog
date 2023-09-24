@@ -24,6 +24,6 @@ jobs:
       - name: Run transformations        
         run: dbt deps && dbt build
       - name: Build Evidence
-        run: npm run build --prefix ./reports
+        run: npm install --prefix ./reports && npm run build --prefix ./reports
       
         
