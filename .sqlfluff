@@ -12,4 +12,4 @@ tab_space_size = 4
 capitalisation_policy = lower
 
 [sqlfluff:rules:convention.select_trailing_comma]
-select_clause_trailing_comma = required
+select_clause_trailing_comma = require
