@@ -1,6 +1,5 @@
 sources:
-  - name: github
-    database: github_archive
+  - name: octocatalog
     schema: raw
     tables:
       - name: github_events

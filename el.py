@@ -62,10 +62,10 @@ def load_data():
 
     if args.prod:
         spinner_text = "🦆☁️  Loading data into MotherDuck..."
-        connection = "md:github_archive"
+        connection = "md:octocatalog"
     else:
         spinner_text = "🦆💾 Loading data into DuckDB..."
-        connection = "./reports/github_archive.db"
+        connection = "./reports/octocatalog.db"
 
     spinner = Halo(text=spinner_text, spinner="dots")
     spinner.start()

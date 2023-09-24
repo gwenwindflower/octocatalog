@@ -2,7 +2,7 @@ with
 
 source as (
 
-    select * from {{ source('github', 'github_events') }}
+    select * from {{ source('octocatalog', 'github_events') }}
 
 ),
 
