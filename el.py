@@ -1,10 +1,11 @@
 import argparse
 import os
-import requests
+from datetime import date, datetime, timedelta
+
 import duckdb
-from tqdm import tqdm
+import requests
 from halo import Halo
-from datetime import datetime, date, timedelta
+from tqdm import tqdm
 
 
 def validate_date(date_str):

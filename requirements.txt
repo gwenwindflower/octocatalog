@@ -2,4 +2,7 @@ dbt-metricflow[duckdb]~=0.3.0
 requests~=2.31.0
 tqdm~=4.66.1
 halo~=0.0.31
+pre-commit~=3.4.0
 sqlfluff~=2.3.0
+black~=23.9.1
+isort~=5.12.0
