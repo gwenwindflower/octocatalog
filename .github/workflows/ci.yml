@@ -18,4 +18,4 @@ jobs:
       - name: Run EL
         run: python3 el.py -c
       - name: Run T
-        run: dbt build
+        run: dbt deps && dbt build
