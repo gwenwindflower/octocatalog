@@ -1,15 +1,17 @@
+![octocatalog_logo](https://github.com/gwenwindflower/octocatalog/assets/91998347/536751f0-8785-4d7b-a7c1-5249995b23ed)
+
 # 😸 Welcome to the `octocatalog` 💾
 
 ![CI Checks](https://github.com/gwenwindflower/octocatalog/actions/workflows/ci.yml/badge.svg)
 
-This is a data-platform-in-a-box[^1] based on [DuckDB](https://duckdb.org/) + [dbt](https://www.getdbt.com/) + [Evidence](https://evidence.dev/). It offers a simple script to extract and load (EL) data from the [GitHub Archive](https://www.gharchive.org/), a dbt project built on top of this data inside a DuckDB database, and BI tooling via Evidence to analyze and present the data.
+This is an open-source, open-data data-platform-in-a-box[^1] based on [DuckDB](https://duckdb.org/) + [dbt](https://www.getdbt.com/) + [Evidence](https://evidence.dev/). It offers a simple script to extract and load (EL) data from the [GitHub Archive](https://www.gharchive.org/), a dbt project built on top of this data inside a DuckDB database, and BI tooling via Evidence to analyze and present the data.
 
 It runs completely local or inside of a devcontainer, but can also run on [MotherDuck](https://motherduck.com/) as a production target. Some (me) call it the Quack Stack.
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/gwenwindflower/octocatalog)<br />
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/gwenwindflower/octocatalog)
 
-## Task runner
+## 👟 Task runner 🏃🏻‍♀️
 There are some basic tasks included using my preferred task runner [Task](https://taskfile.dev/#/). This is optional for your convenience, you can also [run the `el.py` script directly with Python](#running-the-el-script-directly). You can install it with most package managers:
 
 <details>
@@ -63,7 +65,7 @@ task transform # run the dbt transformations
 task [*]-prod # all tasks can be run in a 'prod-mode' against a MotherDuck cloud warehouse
 ```
 
-## Running the EL script directly
+## 🐍 Running the EL script directly 🏗️
 You can also manually run the `el.py` script with `python3 el.py [args]` to pull a custom date range. Please note that the GitHub Archive is only available from 2011-02-12 to the present day and that being event data it is very large. Running more than a few days or weeks will push the limits of DuckDB (that's part of the interest and goal of this project though so have at).
 
 The args are:
@@ -86,7 +88,7 @@ In order for Evidence to work the DuckDB file needs to be built into the `./repo
 
 ---
 
-## Modeling the event data
+## 💅🏾 Modeling the event data ✨
 
 Schemas for the event data [are documented here](https://docs.github.com/en/rest/overview/github-event-types?apiVersion=2022-11-28).
 
