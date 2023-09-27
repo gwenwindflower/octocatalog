@@ -17,8 +17,10 @@ jobs:
         uses: actions/setup-node@v3.8.1
         with:
           node-version: 18.x
-      - name: Install requirements
+      - name: Install Python requirements
         run: python3 -m pip install -r requirements.txt
+      - name: Install Node requirements
+        run: npm install --prefix ./reports
       - name: Run EL
         run: python3 el.py -lc
       - name: Run T
