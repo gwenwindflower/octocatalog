@@ -13,15 +13,22 @@ It runs completely local or inside of a devcontainer, but can also run on [Mothe
 
 Most of the below setup will be done for you automatically if you choose one of the devcontainer options above, so feel free to skip to the [Extract and Load](#extract-and-load) section if you're using one of those.
 
+> [!NOTE]
+> **What's with the name?** GitHub's mascot is the [octocat](https://octodex.github.com/), and this project is a catalog of GitHub data. The ocotcat absolutely rules, I love them, I love puns, I love data, and here we are.
+
 ## 👷🏻‍♀️ Setup 🛠️
 
 There are a few steps to get started with this project. We'll need to:
 
-1. Clone the project locally.
-2. Set up Python, then install the dependencies and other tooling.
+1. [Clone the project locally](#clone-the-project-locally).
+2. [Set up Python, then install the dependencies and other tooling.](#python)
 3. Extract and load the data into DuckDB.
 4. Transform the data with dbt.
 5. Build the BI platform with Evidence.
+
+## 🐙 Clone the project locally 😸
+
+Coming shortly.
 
 ### 🐍 Python 💻
 
@@ -45,7 +52,7 @@ python -m venv .venv
 > **What's this `-m` business?**
 > The `-m` stands for module and tells python to run the `venv` module as a script. It's a good practice to do this with `pip` as well, like `python -m pip install [package]` to ensure you're using the right version of pip for the python interpret you're calling. You can run any available python module as a script this way, though it's most commonly used with standard library modules like `venv` and `pip`.
 
-Once we've got a python virtual environment set up we'll need to activate it. You can do this with:
+Once we've got a Python virtual environment set up we'll need to activate it. You can do this with:
 
 ```shell
 source .venv/bin/activate
@@ -62,11 +69,11 @@ python -m pip install -r requirements.txt
 ```
 
 > [!NOTE]
-> **`-r` u kidding me?** Last thing I promise! The `-r` flag tells pip to install all the packages listed in the file that follows it. In this case we're telling pip to install all the packages listed in the `requirements.txt` file. This is a common pattern in Python projects, and you'll see it a lot.
+> **`-r` u kidding me?** Last thing I promise! The `-r` flag tells `pip` to install all the packages listed in the file that follows it. In this case we're telling pip to install all the packages listed in the `requirements.txt` file. This is a common pattern in Python projects, and you'll see it a lot.
 
 #### Putting it all together
 
-Now you know getting a typical python project set up is as easy as 1-2-3:
+Now you know getting a typical Python project set up is as easy as 1-2-3:
 ```shell
 python -m venv .venv # Create a virtual environment
 source .venv/bin/activate # Activate the virtual environment
