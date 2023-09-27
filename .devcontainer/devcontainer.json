@@ -9,5 +9,5 @@
 
 	// "forwardPorts": [],
 
-	"postCreateCommand": "python3 -m pip install -r requirements.txt"
+	"postCreateCommand": "python3 -m pip install -r requirements.txt && pre-commit install && dbt deps"
 }
