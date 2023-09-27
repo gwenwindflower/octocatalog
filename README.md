@@ -18,7 +18,7 @@ Most of the below setup will be done for you automatically if you choose one of 
 There are a few steps to get started with this project. We'll need to:
 
 1. Clone the project locally.
-2. Setup Python, then install the dependencies and other tooling.
+2. Set up Python, then install the dependencies and other tooling.
 3. Extract and load the data into DuckDB.
 4. Transform the data with dbt.
 5. Build the BI platform with Evidence.
@@ -43,7 +43,19 @@ python3 -m venv .venv
 
 > [!NOTE]
 > **What's this `-m` business?**
-> The m stands for module and tells python to run the `venv` module as a script. It's a good practice to do this with `pip` as well, like `python -m pip install [package]` to ensure you're using the right version of pip. You can run any available python module as a script this way, though it's most commonly used with standard library modules like `venv` and `pip`.
+> The `-m` stands for module and tells python to run the `venv` module as a script. It's a good practice to do this with `pip` as well, like `python -m pip install [package]` to ensure you're using the right version of pip for the python interpret you're calling. You can run any available python module as a script this way, though it's most commonly used with standard library modules like `venv` and `pip`.
+
+Once we've got a python virtual environment set up we'll need to activate it. You can do this with:
+
+```shell
+source .venv/bin/activate
+```
+
+> [!NOTE]
+> **Source what now?**
+> This may seem magical and complex, "virtual environments" sounds like some futuristic terminology from Blade Runner, but it's actually pretty simple. You have an important environment variable on your machine called `PATH`. It specifices a list of directories that should be looked through, in order of priority, when you call a command like `ls` or `python` or `dbt`. The first match your computer gets it will run that command. What the `activate` script does is make sure the virtual environment folder we just created gets put at the front of that list. This means that when you run `python` or `dbt` or `pip` it will look in the virtual environment folder first, and if it finds a match it will run that. This is how we can install specific versions of packages like `dbt` and `duckdb` into our project and not have to worry about them conflicting with other versions of those packages in other projects.
+
+
 
 ### 👟 Task runner 🏃🏻‍♀️
 
