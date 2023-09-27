@@ -1,13 +1,13 @@
 {
-	"name": "Python 3",
-	"image": "mcr.microsoft.com/devcontainers/python:1-3.10-bookworm",
-	"features": {
-		"ghcr.io/eitsupi/devcontainer-features/go-task:1": {
-			"version": "latest"
-		}
-	},
+  "name": "Python 3",
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.10-bookworm",
+  "features": {
+    "ghcr.io/eitsupi/devcontainer-features/go-task:1": {
+      "version": "latest"
+    }
+  },
 
-	// "forwardPorts": [],
+  // "forwardPorts": [],
 
-	"postCreateCommand": "python3 -m pip install -r requirements.txt && pre-commit install && dbt deps"
+  "postCreateCommand": "python3 -m pip install -r requirements.txt && pre-commit install && dbt deps && npm install --prefix ./reports"
 }

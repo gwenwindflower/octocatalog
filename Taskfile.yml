@@ -27,3 +27,6 @@ tasks:
     cmds:
       - python3 el.py -elp
       - dbt build --target prod
+  bi:
+    cmds:
+      - npm run dev --prefix ./reports
