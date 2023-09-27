@@ -41,7 +41,9 @@ Once you have python installed you'll want to set up a virtual environment in th
 python3 -m venv .venv
 ```
 
-> [!NOTE] > **What's this `-m` business?** The m stands for module and tells python to run the `venv` module as a script. It's a good practice to do this with `pip` as well, like `python -m pip install [package]` to ensure you're using the right version of pip. You can run any available python module as a script this way, though it's most commonly used with standard library modules like `venv` and `pip`.
+> [!NOTE]
+> **What's this `-m` business?**
+> The m stands for module and tells python to run the `venv` module as a script. It's a good practice to do this with `pip` as well, like `python -m pip install [package]` to ensure you're using the right version of pip. You can run any available python module as a script this way, though it's most commonly used with standard library modules like `venv` and `pip`.
 
 ### 👟 Task runner 🏃🏻‍♀️
 
