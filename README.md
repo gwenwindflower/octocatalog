@@ -82,7 +82,7 @@ python -m pip install -r requirements.txt # Install the dependencies into the vi
 
 ## 🦆 Extract and Load 📥
 
-You've go two options here: you can [run the `el` scripts directly](#-running-the-el-script-directly-%EF%B8%8F) or you can use [Task](#-task-runner-%EF%B8%8F) to make things a little easier. We recommend the latter, but it's up to you. If you're using one of the devcontainer options above Task is already installed for you.
+You've go two options here: you can [run the `el` scripts directly](#-running-the-el-script-directly-%EF%B8%8F) or you can use the configured [task runner](#-task-runner-%EF%B8%8F) to make things a little easier. We recommend the latter, but it's up to you. If you're using one of the devcontainer options above Task is already installed for you.
 
 > [!NOTE]
 > **Careful of data size**. DuckDB is an in-process database engine, which means it runs primarily in memory. This is great for speed and ease of use, but it also means that it's limited by the amount of memory on your machine. The GitHub Archive data is event data that stretches back years, so is very large, and you'll likely run into memory issues if you try to load more than a few days of data at a time. We recommend using a single hour when developing, and only reaching for a larger amount of data for analysis. We're working on some better options here!
