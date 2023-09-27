@@ -23,8 +23,8 @@ There are a few steps to get started with this project. We'll need to:
 1. [Clone the project locally](#-clone-the-project-locally-).
 2. [Set up Python, then install the dependencies and other tooling.](#-python-)
 3. [Extract and load the data into DuckDB.](#-extract-and-load-)
-4. Transform the data with dbt.
-5. Build the BI platform with Evidence.
+4. [Transform the data with dbt.](#-transform-the-data-with-dbt-)
+5. [Build the BI platform with Evidence.](#-build-the-bi-platform-with-evidence-)
 
 ## 🐙 Clone the project locally 😸
 
@@ -162,6 +162,14 @@ python3 el.py 2023-09-20 2023-09-23 -elp # extract and load 3 days of data into 
 ```
 
 In order for Evidence to work the DuckDB file needs to be built into the `./reports/` directory. If you're looking to access it via the DuckDB CLI you can find it at `./reports/github_archive.db`.
+
+## ⚙️ Transform the data with dbt 🍊
+
+Coming shortly.
+
+## 🎨 Build the BI platform with Evidence 📈
+
+Coming shortly.
 
 ![kim was right](https://github.com/gwenwindflower/octocatalog/assets/91998347/adb3fb70-c666-4d54-9e0c-86600692603b)
 
