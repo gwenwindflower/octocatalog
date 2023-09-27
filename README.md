@@ -52,10 +52,17 @@ source .venv/bin/activate
 ```
 
 > [!NOTE]
-> **Source what now?**
+> **`source` what now?**
 > This may seem magical and complex, "virtual environments" sounds like some futuristic terminology from Blade Runner, but it's actually pretty simple. You have an important environment variable on your machine called `PATH`. It specifices a list of directories that should be looked through, in order of priority, when you call a command like `ls` or `python` or `dbt`. The first match your computer gets it will run that command. What the `activate` script does is make sure the virtual environment folder we just created gets put at the front of that list. This means that when you run `python` or `dbt` or `pip` it will look in the virtual environment folder first, and if it finds a match it will run that. This is how we can install specific versions of packages like `dbt` and `duckdb` into our project and not have to worry about them conflicting with other versions of those packages in other projects.
 
+Now that we're in an isolated virtual environment we can install the dependencies for this project. You can do this with:
 
+```shell
+python -m pip install -r requirements.txt
+```
+
+> [!NOTE]
+> **`-r` u kidding me?** Last thing I promise! The `-r` flag tells pip to install all the packages listed in the file that follows it. In this case we're telling pip to install all the packages listed in the `requirements.txt` file. This is a common pattern in Python projects, and you'll see it a lot.
 
 ### 👟 Task runner 🏃🏻‍♀️
 
