@@ -27,5 +27,7 @@ jobs:
         run: dbt deps && dbt build
       - name: Lint SQL
         run: sqlfluff lint models --format github-annotation-native
-      - name: Build Evidence 
+      - name: Build Evidence
+        env:
+          EVIDENCE_DATABASE: 'duckdb'
         run: npm run build:strict --prefix ./reports
