@@ -16,6 +16,8 @@ Most of the below setup will be done for you automatically if you choose one of 
 > [!NOTE]
 > **What's with the name?** GitHub's mascot is the [octocat](https://octodex.github.com/), and this project is a catalog of GitHub data. The octocat absolutely rules, I love them, I love puns, I love data, and here we are.
 
+![kim was right](https://github.com/gwenwindflower/octocatalog/assets/91998347/adb3fb70-c666-4d54-9e0c-86600692603b)
+
 ## 👷🏻‍♀️ Setup 🛠️
 
 There are a few steps to get started with this project. We'll need to:
@@ -176,9 +178,6 @@ dbt run # just build the models
 dbt test # just test the models
 dbt run -s marts # just build the models int the marts folder
 ```
-
-More coming shortly.
-
 ## 🎨 Build the BI platform with Evidence 📈
 
 Evidence is an open-source, code-first BI platform. It integrates beautifully with dbt and DuckDB, and lets analysts author version-controlled, literate data products with Markdown and SQL. Like the other steps, it's configured to run via the task runner with `task bi`, but you can also run it manually with:
@@ -187,10 +186,8 @@ Evidence is an open-source, code-first BI platform. It integrates beautifully wi
 npm install --prefix ./reports # install the dependencies
 npm run dev --prefix ./reports # run the development server
 ```
-
-More coming shortly.
-
-![kim was right](https://github.com/gwenwindflower/octocatalog/assets/91998347/adb3fb70-c666-4d54-9e0c-86600692603b)
+> [!NOTE]
+> **The heck is npm??** Node Package Manager or npm is the standard package manager for JavaScript and its typed superset TypeScript. Evidence is a JavaScript project, so we use npm to install its dependencies and run the development server. You can [learn more here](https://www.npmjs.com/get-npm). An important note is that JS/TS projects generally have a `package.json` file that lists the dependencies for the project as well as scripts for building and running development servers and such. This is similar to the `requirements.txt` file for Python projects, but more full featured. npm (and its cousins pnpm, npx, yarn, and bun) won't require a virtual environment, they just now to be scoped to the directory. They've really got things figured out over in JS land.
 
 ---
 
