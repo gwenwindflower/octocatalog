@@ -26,4 +26,4 @@ jobs:
       - name: Lint SQL
         run: sqlfluff lint models --format github-annotation-native
       - name: Build Evidence 
-        run: npm --filter ./reports run build:strict
+        run: npm run build:strict --prefix ./reports
