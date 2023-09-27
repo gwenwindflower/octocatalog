@@ -14,14 +14,14 @@ It runs completely local or inside of a devcontainer, but can also run on [Mothe
 Most of the below setup will be done for you automatically if you choose one of the devcontainer options above, so feel free to skip to the [Extract and Load](#extract-and-load) section if you're using one of those.
 
 > [!NOTE]
-> **What's with the name?** GitHub's mascot is the [octocat](https://octodex.github.com/), and this project is a catalog of GitHub data. The ocotcat absolutely rules, I love them, I love puns, I love data, and here we are.
+> **What's with the name?** GitHub's mascot is the [octocat](https://octodex.github.com/), and this project is a catalog of GitHub data. The octocat absolutely rules, I love them, I love puns, I love data, and here we are.
 
 ## 👷🏻‍♀️ Setup 🛠️
 
 There are a few steps to get started with this project. We'll need to:
 
-1. [Clone the project locally](#clone-the-project-locally).
-2. [Set up Python, then install the dependencies and other tooling.](#python)
+1. [Clone the project locally](#-clone-the-project-locally-).
+2. [Set up Python, then install the dependencies and other tooling.](#-python-)
 3. Extract and load the data into DuckDB.
 4. Transform the data with dbt.
 5. Build the BI platform with Evidence.
