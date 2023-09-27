@@ -30,3 +30,6 @@ tasks:
   bi:
     cmds:
       - npm run dev --prefix ./reports
+  clean:
+    cmds:
+      - rm -f ./data/*.json.gz 2>/dev/null; exit 0
