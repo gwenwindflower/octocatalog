@@ -23,7 +23,7 @@ There are a few steps to get started with this project. We'll need to:
 1. [Clone the project locally](#-clone-the-project-locally-).
 2. [Set up Python, then install the dependencies and other tooling.](#-python-)
 3. [Extract and load the data into DuckDB.](#-extract-and-load-)
-4. [Transform the data with dbt.](#-transform-the-data-with-dbt-)
+4. [Transform the data with dbt.](#%EF%B8%8F-transform-the-data-with-dbt-)
 5. [Build the BI platform with Evidence.](#-build-the-bi-platform-with-evidence-)
 
 ## 🐙 Clone the project locally 😸
