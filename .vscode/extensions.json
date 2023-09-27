@@ -1,0 +1,22 @@
+{
+    "recommendations": [
+        "github.codespaces",
+        "gitpod.gitpod-desktop",
+        "ms-vscode-remote.vscode-remote-extensionpack",
+        "evidence.evidence-vscode",
+        "GitHub.vscode-pull-request-github",
+        "cschleiden.vscode-github-actions",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.black-formatter",
+        "ms-python.isort",
+        "charliermarsh.ruff",
+        "redhat.vscode-yaml",
+        "task.vscode-task",
+        "samuelcolvin.jinjahtml",
+        "bungcip.better-toml",
+        "tamasfe.even-better-toml",
+        "mechatroner.rainbow-csv",
+        "bastienboutonnet.vscode-dbt"
+    ]
+}
