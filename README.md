@@ -37,12 +37,11 @@ The rest of this guide will assume you've got `python3` aliased to `python`, but
 
 Once you have python installed you'll want to set up a virtual environment in the project directory. This will ensure the dependencies that we install are scoped to this project, and not globally on your system. I like to call my virtual environments `.venv` but you can call them whatever you want. You can do this with:
 
-````shell
+```shell
 python3 -m venv .venv
 ```
 
-> [!NOTE]
-> **What's this `-m` business?** The m stands for module and tells python to run the `venv` module as a script. It's a good practice to do this with `pip` as well, like `python -m pip install [package]` to ensure you're using the right version of pip. You can run any available python module as a script this way, though it's most commonly used with standard library modules like `venv` and `pip`.
+> [!NOTE] > **What's this `-m` business?** The m stands for module and tells python to run the `venv` module as a script. It's a good practice to do this with `pip` as well, like `python -m pip install [package]` to ensure you're using the right version of pip. You can run any available python module as a script this way, though it's most commonly used with standard library modules like `venv` and `pip`.
 
 ### 👟 Task runner 🏃🏻‍♀️
 
@@ -56,7 +55,7 @@ There are some basic tasks included using my preferred task runner [Task](https:
 
 ```shell
 brew install go-task
-````
+```
 
 </details>
 <details>
