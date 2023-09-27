@@ -11,7 +11,41 @@ It runs completely local or inside of a devcontainer, but can also run on [Mothe
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/gwenwindflower/octocatalog)<br />
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/gwenwindflower/octocatalog)
 
-## 👟 Task runner 🏃🏻‍♀️
+Most of the below setup will be done for you automatically if you choose one of the devcontainer options above, so feel free to skip to the [Extract and Load](#extract-and-load) section if you're using one of those.
+
+## 👷🏻‍♀️ Setup 🛠️
+
+There are a few steps to get started with this project. We'll need to:
+
+1. Clone the project locally.
+2. Setup Python, then install the dependencies and other tooling.
+3. Extract and load the data into DuckDB.
+4. Transform the data with dbt.
+5. Build the BI platform with Evidence.
+
+### 🐍 Python 💻
+
+You likely already have relatively recent version of Python 3 installed on your system. If you use the devcontainer options above it will be installed for you. If not, we recommend using `pyenv` to manage your python versions. You should be fine with anything between 3.7 and 3.11.
+
+I highly recommnend aliasing `python3` to just `python` in your shell. This will ensure you're using the right version of python and save you some thinking and typing. There's generally no practical reason the majority of data folks would ever need to use Python 2 at this point, and if you do, you probably know what you're doing an don't need this guide 😅. To alias python you can add this to your `.bashrc` or `.zshrc`:
+
+```shell
+alias python=python3
+```
+
+The rest of this guide will assume you've got `python3` aliased to `python`, but if you don't you'll need to replace `python` with `python3` in the commands below.
+
+Once you have python installed you'll want to set up a virtual environment in the project directory. This will ensure the dependencies that we install are scoped to this project, and not globally on your system. I like to call my virtual environments `.venv` but you can call them whatever you want. You can do this with:
+
+````shell
+python3 -m venv .venv
+```
+
+> [!NOTE]
+> **What's this `-m` business?** The m stands for module and tells python to run the `venv` module as a script. It's a good practice to do this with `pip` as well, like `python -m pip install [package]` to ensure you're using the right version of pip. You can run any available python module as a script this way, though it's most commonly used with standard library modules like `venv` and `pip`.
+
+### 👟 Task runner 🏃🏻‍♀️
+
 There are some basic tasks included using my preferred task runner [Task](https://taskfile.dev/#/). This is optional for your convenience, you can also [run the `el.py` script directly with Python](#running-the-el-script-directly). You can install it with most package managers:
 
 <details>
@@ -20,9 +54,9 @@ There are some basic tasks included using my preferred task runner [Task](https:
   <br>
   Using Homebrew:
 
-  ```shell
-  brew install go-task
-  ```
+```shell
+brew install go-task
+````
 
 </details>
 <details>
@@ -31,15 +65,15 @@ There are some basic tasks included using my preferred task runner [Task](https:
   <br>
   Using Chocolatey:
 
-  ```shell
-  choco install go-task
-  ```
+```shell
+choco install go-task
+```
 
-  Using Scoop:
+Using Scoop:
 
-  ```shell
-  scoop install task
-  ```
+```shell
+scoop install task
+```
 
 </details>
 <details>
@@ -48,9 +82,9 @@ There are some basic tasks included using my preferred task runner [Task](https:
   <br>
   Using Yay:
 
-  ```shell
-  yay -S go-task-bin
-  ```
+```shell
+yay -S go-task-bin
+```
 
 </details>
 
@@ -65,7 +99,8 @@ task transform # run the dbt transformations
 task [*]-prod # all tasks can be run in a 'prod-mode' against a MotherDuck cloud warehouse
 ```
 
-## 🐍 Running the EL script directly 🏗️
+### 🐍 Running the EL script directly 🏗️
+
 You can also manually run the `el.py` script with `python3 el.py [args]` to pull a custom date range, run on small test data file, and isolate the extract or load steps. Please note that the GitHub Archive is available from 2011-02-12 to the present day and that being event data it is very large. Running more than a few days or weeks will push the limits of DuckDB (that's part of the interest and goal of this project though so have at).
 
 The args are:
