@@ -22,7 +22,7 @@ There are a few steps to get started with this project. We'll need to:
 
 1. [Clone the project locally](#-clone-the-project-locally-).
 2. [Set up Python, then install the dependencies and other tooling.](#-python-)
-3. Extract and load the data into DuckDB.
+3. [Extract and load the data into DuckDB.](#-extract-and-load-)
 4. Transform the data with dbt.
 5. Build the BI platform with Evidence.
 
@@ -80,9 +80,16 @@ source .venv/bin/activate # Activate the virtual environment
 python -m pip install -r requirements.txt # Install the dependencies into the virtual environment
 ```
 
+## 🦆 Extract and Load 📥
+
+You've go two options here: you can [run the `el` scripts directly](#-running-the-el-script-directly-) or you can use [Task](#-task-runner-) to make things a little easier. We recommend the latter, but it's up to you. If you're using one of the devcontainer options above Task is already installed for you.
+
+> [!NOTE]
+> **Careful of data size**. DuckDB is an in-process database engine, which means it runs primarily in memory. This is great for speed and ease of use, but it also means that it's limited by the amount of memory on your machine. The GitHub Archive data is event data that stretches back years, so is very large, and you'll likely run into memory issues if you try to load more than a few days of data at a time. We recommend using a single hour when developing, and only reaching for a larger amount of data for analysis. We're working on some better options here!
+
 ### 👟 Task runner 🏃🏻‍♀️
 
-There are some basic tasks included using my preferred task runner [Task](https://taskfile.dev/#/). This is optional for your convenience, you can also [run the `el.py` script directly with Python](#running-the-el-script-directly). You can install it with most package managers:
+There are some basic tasks included using my preferred task runner [Task](https://taskfile.dev/#/). This is optional for your convenience, you can also [run the `el.py` script directly with Python](#-running-the-el-script-directly-). You can install it with most package managers:
 
 <details>
 
@@ -133,6 +140,7 @@ task extract # pull data from github archive for the past day into the data/ dir
 task load # load data from the data/ directory into duckdb
 task transform # run the dbt transformations
 task [*]-prod # all tasks can be run in a 'prod-mode' against a MotherDuck cloud warehouse
+task bi # serve the Evidence project locally for development
 ```
 
 ### 🐍 Running the EL script directly 🏗️
