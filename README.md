@@ -38,7 +38,7 @@ The rest of this guide will assume you've got `python3` aliased to `python`, but
 Once you have python installed you'll want to set up a virtual environment in the project directory. This will ensure the dependencies that we install are scoped to this project, and not globally on your system. I like to call my virtual environments `.venv` but you can call them whatever you want. You can do this with:
 
 ```shell
-python3 -m venv .venv
+python -m venv .venv
 ```
 
 > [!NOTE]
@@ -63,6 +63,15 @@ python -m pip install -r requirements.txt
 
 > [!NOTE]
 > **`-r` u kidding me?** Last thing I promise! The `-r` flag tells pip to install all the packages listed in the file that follows it. In this case we're telling pip to install all the packages listed in the `requirements.txt` file. This is a common pattern in Python projects, and you'll see it a lot.
+
+#### Putting it all together
+
+Now you know getting a typical python project set up is as easy as 1-2-3:
+```shell
+python -m venv .venv # Create a virtual environment
+source .venv/bin/activate # Activate the virtual environment
+python -m pip install -r requirements.txt # Install the dependencies into the virtual environment
+```
 
 ### 👟 Task runner 🏃🏻‍♀️
 
