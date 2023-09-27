@@ -165,11 +165,30 @@ In order for Evidence to work the DuckDB file needs to be built into the `./repo
 
 ## ⚙️ Transform the data with dbt 🍊
 
-Coming shortly.
+dbt is the industry-standard control plane for data transformations. We use it to get our data in the shape we want for analysis.
+
+The task runner is configured to run dbt for you `task transform`, but if you'd like to run it manually you can do so by running these commands in the virtual environment:
+
+```shell
+dbt deps # install the dependencies
+dbt build # build and test the models
+dbt run # just build the models
+dbt test # just test the models
+dbt run -s marts # just build the models int the marts folder
+```
+
+More coming shortly.
 
 ## 🎨 Build the BI platform with Evidence 📈
 
-Coming shortly.
+Evidence is an open-source, code-first BI platform. It integrates beautifully with dbt and DuckDB, and lets analysts author version-controlled, literate data products with Markdown and SQL. Like the other steps, it's configured to run via the task runner with `task bi`, but you can also run it manually with:
+
+```shell
+npm install --prefix ./reports # install the dependencies
+npm run dev --prefix ./reports # run the development server
+```
+
+More coming shortly.
 
 ![kim was right](https://github.com/gwenwindflower/octocatalog/assets/91998347/adb3fb70-c666-4d54-9e0c-86600692603b)
 
