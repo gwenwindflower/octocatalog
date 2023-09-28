@@ -8,3 +8,4 @@ ruff~=0.0.291
 sqlfluff-templater-dbt~=2.3.2
 sqlfluff~=2.3.2
 tqdm~=4.66.1
+duckdb~=0.8.1
