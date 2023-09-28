@@ -11,7 +11,7 @@ It runs completely local or inside of a devcontainer, but can also run on [Mothe
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/gwenwindflower/octocatalog)<br />
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/gwenwindflower/octocatalog)
 
-Most of the below setup will be done for you automatically if you choose one of the devcontainer options above, so feel free to skip to the [Extract and Load](#-extract-and-load-) section if you're using one of those.
+Most of the below setup will be done for you automatically if you choose one of the devcontainer options above, so feel free to skip to the [Extract and Load](#-extract-and-load-) section if you're using one of those. Please note that while devcontainers are very neat and probably the future, they also add some mental overhead and complexity at their present stage of development that somewhat offsets the ease of use and reproducibility they bring to the table. I personally prefer local development still for most things.
 
 > [!NOTE] > **What's with the name?** GitHub's mascot is the [octocat](https://octodex.github.com/), and this project is a catalog of GitHub data. The octocat absolutely rules, I love them, I love puns, I love data, and here we are.
 
@@ -19,7 +19,7 @@ Most of the below setup will be done for you automatically if you choose one of 
 
 ## 👷🏻‍♀️ Setup 🛠️
 
-There are a few steps to get started with this project. We'll need to:
+There are a few steps to get started with this project if you want to develop locally. We'll need to:
 
 1. [Clone the project locally](#-clone-the-project-locally-).
 2. [Set up Python, then install the dependencies and other tooling.](#-python-)
@@ -27,13 +27,27 @@ There are a few steps to get started with this project. We'll need to:
 4. [Transform the data with dbt.](#%EF%B8%8F-transform-the-data-with-dbt-)
 5. [Build the BI platform with Evidence.](#-build-the-bi-platform-with-evidence-)
 
-## 🐙 Clone the project locally 😸
-
-Coming shortly.
-
-### Setup script
+### 🤖 Setup script 🏎️
 
 We encourage to to run the setup steps for the sake of understanding them more deeply and learning, but if they feel overwhelming or, conversely, you're experienced with this stack and want to go faster, we've included a `setup.sh` bash script that will do everything to get you to baseline functioning automatically. Just `source setup.sh` and have at.
+
+### 🐙 Clone the project locally 😸
+
+#### Use the GitHub CLI (Easier for beginners)
+
+1. [Install the GitHub CLI.](https://cli.github.com/) 
+2. `cd path/to/where/you/keep/projects`
+3. `gh repo clone gwenwindflower/octocatalog`
+4. `cd octocatalog`
+5. Next steps!
+
+#### Clone via SSH (More standard but a bit more involved)
+1. Set up SSH keys for GitHub.
+2. Grab the SSH link from the green `Code` button in the top-right of the repo. It will be under Local > SSH.
+4. `cd path/to/where/you/keep/projects`
+5. `git clone [ssh-link-you-copied]`
+6. `cd octocatalog`
+7. Next steps!
 
 ### 🐍 Python 💻
 
