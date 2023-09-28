@@ -14,3 +14,5 @@ env
 *.wal
 
 data/*.json.gz
+
+.user.yml
