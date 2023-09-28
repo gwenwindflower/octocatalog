@@ -33,8 +33,6 @@ Coming shortly.
 
 ### Setup script
 
-               k
-
 We encourage to to run the setup steps for the sake of understanding them more deeply and learning, but if they feel overwhelming or, conversely, you're experienced with this stack and want to go faster, we've included a `setup.sh` bash script that will do everything to get you to baseline functioning automatically. Just `source setup.sh` and have at.
 
 ### 🐍 Python 💻
