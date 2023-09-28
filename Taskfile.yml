@@ -1,6 +1,13 @@
 version: "3"
 
 tasks:
+  setup:
+    # only run this inside of a python virtual environment
+    - python3 -m pip install --upgrade pip
+    - python3 -m pip install -r requirements.txt
+    - pre-commit install
+    - dbt deps
+    - npm install --prefix ./reports
   extract:
     cmds:
       - python3 el.py -e
@@ -13,9 +20,6 @@ tasks:
   load-prod:
     cmds:
       - python3 el.py -lp
-  transform-setup:
-    cmds:
-      - dbt deps
   transform:
     cmds:
       - dbt build
@@ -30,9 +34,6 @@ tasks:
     cmds:
       - python3 el.py -elp
       - dbt build --target prod
-  bi-setup:
-    cmds:
-      - npm --prefix ./reports install
   bi:
     cmds:
       - npm run dev --prefix ./reports
