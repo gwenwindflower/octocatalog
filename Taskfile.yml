@@ -40,3 +40,8 @@ tasks:
   clean:
     cmds:
       - rm -f ./data/*.json.gz 2>/dev/null; exit 0
+  generate-fixtures:
+    cmds:
+      - python3 el.py -e 2023-09-26-10 2023-09-26-10
+      - duckdb < generate_fixtures.sql
+      - rm ./data/2023-09-26-10.json.gz
