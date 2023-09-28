@@ -7,6 +7,32 @@ import requests
 from halo import Halo
 from tqdm import tqdm
 
+columns = """
+            columns={
+                'id': 'VARCHAR',
+                'type': 'VARCHAR',
+                'actor': 'STRUCT(
+                    id VARCHAR,
+                    login VARCHAR,
+                    display_login VARCHAR,
+                    gravatar_id VARCHAR,
+                    url VARCHAR,
+                    avatar_url VARCHAR
+                )',
+                'repo': 'STRUCT(id VARCHAR, name VARCHAR, url VARCHAR)',
+                'payload': 'JSON',
+                'public': 'BOOLEAN',
+                'created_at': 'TIMESTAMP',
+                'org': 'STRUCT(
+                    id VARCHAR,
+                    login VARCHAR,
+                    gravatar_id VARCHAR,
+                    url VARCHAR,
+                    avatar_url VARCHAR
+                )'
+            }
+        """
+
 
 def validate_date(datetime_str):
     try:
@@ -63,8 +89,8 @@ def extract_data(start_datetime, end_datetime):
 
     while active_datetime <= end_datetime:
         download_data(active_datetime)
-        if args.incremental and args.prod:
-            load_data()
+        if args.incremental and args.load:
+            load_data(incremental=True)
             os.remove(
                 f"data/{datetime.strftime(active_datetime, '%Y-%m-%d-%-H')}.json.gz"
             )
@@ -74,7 +100,7 @@ def extract_data(start_datetime, end_datetime):
     progress_bar.close()
 
 
-def load_data():
+def load_data(incremental=False):
     if args.check:
         data_path = "data/testing.json"
     else:
@@ -87,45 +113,28 @@ def load_data():
         spinner_text = "🦆💾 Loading data into DuckDB..."
         connection = "./reports/octocatalog.db"
 
+    if incremental:
+        table_create = "create table if not exists raw.github_events as "
+    else:
+        table_create = "create or replace table raw.github_events as "
+
     spinner = Halo(text=spinner_text, spinner="dots")
     spinner.start()
 
     con = duckdb.connect(database=connection, read_only=False)
     con.execute(
-        """
-        CREATE SCHEMA IF NOT EXISTS raw;
-        CREATE OR REPLACE TABLE raw.github_events AS
-        SELECT * FROM read_ndjson(
-        """
-        "'" + data_path + "',"
-        """
-            columns={
-                'id': 'VARCHAR',
-                'type': 'VARCHAR',
-                'actor': 'STRUCT(
-                    id VARCHAR,
-                    login VARCHAR,
-                    display_login VARCHAR,
-                    gravatar_id VARCHAR,
-                    url VARCHAR,
-                    avatar_url VARCHAR
-                )',
-                'repo': 'STRUCT(id VARCHAR, name VARCHAR, url VARCHAR)',
-                'payload': 'JSON',
-                'public': 'BOOLEAN',
-                'created_at': 'TIMESTAMP',
-                'org': 'STRUCT(
-                    id VARCHAR,
-                    login VARCHAR,
-                    gravatar_id VARCHAR,
-                    url VARCHAR,
-                    avatar_url VARCHAR
-                )'
-            }
-        );
-        """
+        "create schema if not exists raw;"
+        + table_create
+        + "select * from read_ndjson("
+        + "'"
+        + data_path
+        + "'"
+        + ","
+        + columns
+        + ");"
     )
     con.close()
+
     if args.prod:
         spinner.succeed("🦆☁️ Loading data into MotherDuck... Done!")
     else:
@@ -187,5 +196,5 @@ args = parser.parse_args()
 if args.extract:
     extract_data(args.start_datetime, args.end_datetime)
 
-if args.load and not args.incremental:
+if args.load and not args.incremental and not args.extract:
     load_data()

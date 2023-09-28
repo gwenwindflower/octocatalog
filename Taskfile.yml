@@ -10,16 +10,16 @@ tasks:
     - npm install --prefix ./reports
   extract:
     cmds:
-      - python3 el.py -e
-  extract-prod:
-    cmds:
-      - python3 el.py -ep
+      - python3 el.py -e {{.start}} {{.end}}
   load:
     cmds:
-      - python3 el.py -l
+      - python3 el.py -l {{.start}} {{.end}}
   load-prod:
     cmds:
-      - python3 el.py -lp
+      - python3 el.py -lp {{.start}} {{.end}}
+  el-prod-incremental:
+    cmds:
+      - python3 el.py -elpi {{.start}} {{.end}}
   transform:
     cmds:
       - dbt build
@@ -28,11 +28,11 @@ tasks:
       - dbt build --target prod
   elt:
     cmds:
-      - python3 el.py -el
+      - python3 el.py -eli {{.start}} {{.end}}
       - dbt build
   elt-prod:
     cmds:
-      - python3 el.py -elp
+      - python3 el.py -elpi {{.start}} {{.end}}
       - dbt build --target prod
   bi:
     cmds:
