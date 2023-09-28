@@ -11,7 +11,7 @@ from tqdm import tqdm
 def validate_date(datetime_str):
     try:
         input_datetime = datetime.strptime(datetime_str, "%Y-%m-%d-%H")
-        current_datetime = datetime.now()
+        current_datetime = datetime.utcnow()
         if input_datetime < datetime(2015, 1, 1) or input_datetime > current_datetime:
             raise argparse.ArgumentTypeError(
                 f"Datetime {datetime_str} is outside the acceptable range."
@@ -76,9 +76,9 @@ def extract_data(start_datetime, end_datetime):
 
 def load_data():
     if args.check:
-        data_path = "data-test"
+        data_path = "data/testing.json"
     else:
-        data_path = "data"
+        data_path = "data/*.json.gz"
 
     if args.prod:
         spinner_text = "🦆☁️  Loading data into MotherDuck..."
@@ -97,7 +97,7 @@ def load_data():
         CREATE OR REPLACE TABLE raw.github_events AS
         SELECT * FROM read_ndjson(
         """
-        "'" + data_path + "/*.json.gz" + "',"
+        "'" + data_path + "',"
         """
             columns={
                 'id': 'VARCHAR',
