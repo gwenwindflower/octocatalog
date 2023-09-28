@@ -137,13 +137,14 @@ More install methods are [detailed in the Task docs](https://taskfile.dev/instal
 
 Tasks included are:
 
-```shell
-task extract # pull data from github archive for the past day into the data/ directory
-task load # load data from the data/ directory into duckdb
-task transform # run the dbt transformations
-task [*]-prod # all tasks can be run in a 'prod-mode' against a MotherDuck cloud warehouse
-task bi # serve the Evidence project locally for development
-```
+| Task     | Description |
+|----------|----------|
+| `task setup`  | Setups up all required tools to run the stack   |
+| `task extract`   | pull data from github archive for the past day into the data/ directory   |
+| `task load`   | load data from the data/ directory into duckdb   |
+| `task transform`   | run the dbt transformations   |
+| `task [*]-prod`   | all tasks can be run in a 'prod-mode' against a MotherDuck cloud warehouse   |
+| `task bi`   | serve the Evidence project locally for development   |
 
 ### 🐍 Running the EL script directly 🏗️
 

@@ -1,6 +1,12 @@
 version: "3"
 
 tasks:
+  setup:
+    - python -m venv .venv # Create a virtual environment
+    - source .venv/bin/activate # Activate the virtual environment
+    - python -m pip install -r requirements.txt
+    - dbt deps
+    - npm --prefix ./reports install
   extract:
     cmds:
       - python3 el.py -e
@@ -15,7 +21,6 @@ tasks:
       - python3 el.py -lp
   transform:
     cmds:
-      - dbt deps
       - dbt build
   transform-prod:
     cmds:
