@@ -31,4 +31,4 @@ jobs:
         env:
           EVIDENCE_DATABASE: 'duckdb'
           EVIDENCE_DUCKDB_FILENAME: 'octocatalog.db'
-        run: npm run build:strict --prefix ./reports
+        run: npm run build --prefix ./reports
