@@ -10,7 +10,7 @@ COPY (
         any_value(org) as org,
 
     from read_ndjson(
-            "2023-09-26-10.json",
+            "./data/2023-09-26-10.json.gz",
             columns={
                 'id': 'VARCHAR',
                 'type': 'VARCHAR',
@@ -36,4 +36,4 @@ COPY (
             }
         )
     group by type, public
-) to 'testing.json';
+) to './data/testing.json';
