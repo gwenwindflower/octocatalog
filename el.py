@@ -136,14 +136,14 @@ parser = argparse.ArgumentParser()
 parser.add_argument(
     "start_datetime",
     help="The start date of the range",
-    default=datetime.strftime(datetime.now() - timedelta(hours=1), "%Y-%m-%d-%H"),
+    default=datetime.strftime(datetime.utcnow() - timedelta(hours=1), "%Y-%m-%d-%H"),
     nargs="?",
     type=validate_date,
 )
 parser.add_argument(
     "end_datetime",
     help="The end date of the range (inclusive)",
-    default=datetime.strftime(datetime.now(), "%Y-%m-%d-%H"),
+    default=datetime.strftime(datetime.utcnow(), "%Y-%m-%d-%H"),
     nargs="?",
     type=validate_date,
 )

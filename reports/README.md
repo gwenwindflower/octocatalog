@@ -38,8 +38,8 @@ If you see `✗ orders_by_month Missing database credentials`, you need to add t
 
 1. Open the settings menu at [localhost:3000/settings](http://localhost:3000/settings)
 2. select `DuckDB`
-3. enter `needful_things`
-4. select `.duckdb` and save
+3. enter `octocatalog`
+4. select `.db` and save
 
 ## Learning More
 
