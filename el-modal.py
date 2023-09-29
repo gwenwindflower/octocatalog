@@ -5,7 +5,7 @@ stub = modal.Stub(
 )
 
 
-@stub.function(secret=modal.Secret.from_name("winnie-aws"))
+@stub.function(secret=modal.Secret.from_name("aws"))
 def scrape_data(active_datetime):
     from datetime import datetime
 
@@ -15,18 +15,16 @@ def scrape_data(active_datetime):
     bucket_name = "github-archive-ddb"
     s3 = boto3.client("s3")
 
-    url_datetime = datetime.strftime(active_datetime, "%Y-%m-%d-%-H")
-    url = f"https://data.gharchive.org/{url_datetime}.json.gz"
+    file_path = f"{datetime.strftime(active_datetime, '%Y-%m-%d-%-H')}.json.gz"
+    url = f"https://data.gharchive.org/{file_path}"
 
-    response = requests.get(url, stream=True)
+    response = requests.get(url)
 
     if response.status_code == 200:
         file_content = response.content
-        s3.put_object(
-            Bucket=bucket_name, Key=f"data/{url_datetime}.json.gz", Body=file_content
-        )
+        s3.put_object(Bucket=bucket_name, Key=file_path, Body=file_content)
     else:
-        print(f"💩 Crap! {url_datetime} returned status code {response.status_code}.")
+        print(f"💩 Crap! {file_path} returned status code {response.status_code}.")
 
 
 @stub.function()
@@ -43,5 +41,6 @@ def bucket_data(start, end):
 
 
 @stub.local_entrypoint()
+# TODO: validate args
 def main(start, end):
     bucket_data.remote(start, end)
