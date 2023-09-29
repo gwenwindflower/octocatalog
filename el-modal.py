@@ -1,13 +1,8 @@
 import modal
 
 stub = modal.Stub(
-    image=modal.Image.debian_slim().pip_install_from_requirements("requirements.txt"),
+    image=modal.Image.debian_slim().pip_install(["boto3", "requests"]),
 )
-
-
-@stub.local_entrypoint()
-def main():
-    bucket_data.remote("2023-09-28-00", "2023-09-28-03")
 
 
 @stub.function(secret=modal.Secret.from_name("winnie-aws"))
@@ -35,13 +30,18 @@ def scrape_data(active_datetime):
 
 
 @stub.function()
-def bucket_data(start_datetime, end_datetime):
+def bucket_data(start, end):
     from datetime import datetime, timedelta
 
-    start_datetime = datetime.strptime(start_datetime, "%Y-%m-%d-%H")
-    end_datetime = datetime.strptime(end_datetime, "%Y-%m-%d-%H")
+    start_datetime = datetime.strptime(start, "%Y-%m-%d-%H")
+    end_datetime = datetime.strptime(end, "%Y-%m-%d-%H")
     active_datetime = start_datetime
 
     while active_datetime <= end_datetime:
         scrape_data.remote(active_datetime)
         active_datetime += timedelta(hours=1)
+
+
+@stub.local_entrypoint()
+def main(start, end):
+    bucket_data.remote(start, end)
