@@ -1,6 +1,6 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/gwenwindflower/octocatalog/assets/91998347/f65a6037-4fc1-46c3-9cc3-acd6bc097ca5">
-  <source media="(prefers-color-scheme: light)" srcset="https://github.com/gwenwindflower/octocatalog/assets/91998347/536751f0-8785-4d7b-a7c1-5249995b23ed">
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/gwenwindflower/octocatalog/assets/91998347/44aa2a7a-ffe0-4f00-aabf-cc524b442c46">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/gwenwindflower/octocatalog/assets/91998347/32f3af43-7ff9-4185-9601-d53eb2413e98">
   <img alt="The octocatalog text logo." src="https://github.com/gwenwindflower/octocatalog/assets/91998347/536751f0-8785-4d7b-a7c1-5249995b23ed">
 </picture>
 
