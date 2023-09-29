@@ -27,10 +27,10 @@ Most of the below setup will be done for you automatically if you choose one of 
 There are a few steps to get started with this project if you want to develop locally. We'll need to:
 
 1. [Clone the project locally](#-clone-the-project-locally-).
-2. [Set up Python, then install the dependencies and other tooling.](#-python-)
-3. [Extract and load the data into DuckDB.](#-extract-and-load-)
-4. [Transform the data with dbt.](#%EF%B8%8F-transform-the-data-with-dbt-)
-5. [Build the BI platform with Evidence.](#-build-the-bi-platform-with-evidence-)
+2. [Set up Python, then install the dependencies and other tooling](#-python-).
+3. [Extract and load the data locally](#-extract-and-load-).
+5. [Transform the data with dbt](#%EF%B8%8F-transform-the-data-with-dbt-).
+6. [Build the BI platform with Evidence](#-build-the-bi-platform-with-evidence-).
 
 ### 🤖 Setup script 🏎️
 
@@ -109,10 +109,20 @@ This project used [pre-commit](https://pre-commit.com/) to run basic checks for 
 
 ## 🦆 Extract and Load 📥
 
+Extract and load is the process of taking data from one source, like an API, and loading it into another source, typically a data warehouse. In our case our source is the GitHub Archive, and our load targets are either: local, [MotherDuck](https://motherduck.com/), or [S3](https://en.wikipedia.org/wiki/Amazon_S3).
+
+### 💻 Local usage 💾
+
 You've go two options here: you can [run the `el` scripts directly](#-running-the-el-script-directly-%EF%B8%8F) or you can use the configured [task runner](#-task-runner-%EF%B8%8F) to make things a little easier. We recommend the latter, but it's up to you. If you're using one of the devcontainer options above Task is already installed for you.
 
+If you run the script directly, it takes two arguments: a start and end datetime string, both formatted as `'YYYY-MM-DD-HH'`. It is inclusive of both, so for example running `python el.py '2023-09-01-01' '2023-09-01-02'` will load _two_ hours: 1am and 2am on September 9th 2023. Pass the same argument for both to pull just that hour.
+
 > [!NOTE]
-> **Careful of data size**. DuckDB is an in-process database engine, which means it runs primarily in memory. This is great for speed and ease of use, but it also means that it's limited by the amount of memory on your machine. The GitHub Archive data is event data that stretches back years, so is very large, and you'll likely run into memory issues if you try to load more than a few days of data at a time. We recommend using a single hour when developing, and only reaching for a larger amount of data for analysis. We're working on some better options here!
+> **Careful of data size**. DuckDB is an in-process database engine, which means it runs primarily in memory. This is great for speed and ease of use, but it also means that it's (somewhat) limited by the amount of memory on your machine. The GitHub Archive data is event data that stretches back years, so is very large, and you'll likely run into memory issues if you try to load more than a few days of data at a time. We recommend using a single hour locally when developing. When you want to go bigger for production use you'll probably want to leverage the option below.
+
+### ☁️ Bulk load the data 🚚
+
+If you're comfortable with S3 and want to pull a larger amount of data, we've got you covered there as well. The `el-modal.py` script leverages the incredible Modal platform to pull data and upload it to S3 in parallelized, performant cloud containers. It works pretty much like the regular `el.py` script, you supply it with start and end datetime string in `'YYYY-MM-DD-HH'` format, and it goes to town. Modal currently gives you $30 of free credits a month, which is more than enough to pull quite a bit of data. 
 
 ### 👟 Task runner 🏃🏻‍♀️
 
