@@ -7,6 +7,7 @@ logs/
 .venv
 venv
 .env
+.env-*
 env
 
 *.duckdb
@@ -16,3 +17,5 @@ env
 data/*.json.gz
 
 .user.yml
+
+__pycache__
