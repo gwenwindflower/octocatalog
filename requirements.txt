@@ -1,8 +1,10 @@
 black~=23.9.1
+boto3~=1.28.57
 dbt-metricflow[duckdb]~=0.3.0
 duckdb~=0.8.1
 halo~=0.0.31
 isort~=5.12.0
+modal~=0.53.3683
 pre-commit~=3.4.0
 requests~=2.31.0
 ruff~=0.0.291
