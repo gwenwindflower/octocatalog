@@ -1,4 +1,8 @@
-![octocatalog_logo](https://github.com/gwenwindflower/octocatalog/assets/91998347/536751f0-8785-4d7b-a7c1-5249995b23ed)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/gwenwindflower/octocatalog/assets/91998347/f65a6037-4fc1-46c3-9cc3-acd6bc097ca5">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/gwenwindflower/octocatalog/assets/91998347/536751f0-8785-4d7b-a7c1-5249995b23ed">
+  <img alt="The octocatalog text logo." src="https://github.com/gwenwindflower/octocatalog/assets/91998347/536751f0-8785-4d7b-a7c1-5249995b23ed">
+</picture>
 
 # 😸 Welcome to the `octocatalog` 💾
 
