@@ -6,8 +6,10 @@ sources:
 
 In the last <Value data={issue_summary} column="last_hours"/> hours there have been <b><Value data={issue_summary} column="issues"/></b> events across <Value data={issue_summary} column="repo_count"/> repositories! This has involved <Value data={issue_summary} column="actor_count"/> contributors opening and closing issues, <Value data={issue_summary} column="opened_events"/> and <Value data={issue_summary} column="closed_events"/> respectively.
 
-<b><Value data={query_name} /></b> was the top actor 
+<b><Value data={top_actor} /></b> was the top contributor with <b><Value data={top_actor_repo} column="repo_events"/></b> issues added to <b><Value data={top_actor_repo} column="repo_name"/></b> repository!
 
+<br>
+<br>
 
 <!-- Coming soon! You could contribute this page! -->
 <BigValue 
@@ -60,7 +62,13 @@ In the last <Value data={issue_summary} column="last_hours"/> hours there have b
 ## Issue Sample
 ```sql issuesraw
 select * from ${issues} limit 100
+
 ```
+
+<br>
+
+_The longest content issue in the data set reads:_ <Value data={issue_content_len} />
+<br>
 <Details title="Definitions">
 
 ```sql issue_summary
@@ -81,7 +89,8 @@ from ${issues}
     count(1) as actor_events,
   from ${issues}
   group by all
-  order by actor_login
+  having actor_events>1
+  order by actor_login desc
   limit 1
 ```
 
@@ -94,6 +103,17 @@ from ${issues}
   limit 1
 ```
 
+
+```sql issue_content_len
+  select 
+    left(issue_body, 400) as content_summary,
+    issue_body,
+    length(issue_body) as issue_body_len,
+  from ${issues} 
+  group by all
+  order by issue_body_len desc
+  limit 1
+```
 
 ```sql issue_count
   select count(1) as issues,
