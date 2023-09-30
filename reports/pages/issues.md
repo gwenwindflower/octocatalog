@@ -7,8 +7,6 @@ sources:
 In the last <Value data={issue_summary} column="last_hours"/> hours there have been <b><Value data={issue_summary} column="issues"/></b> events across <Value data={issue_summary} column="repo_count"/> repositories! This has involved <Value data={issue_summary} column="actor_count"/> contributors opening and closing issues, <Value data={issue_summary} column="opened_events"/> and <Value data={issue_summary} column="closed_events"/> respectively.
 
 
-
-
 <!-- Coming soon! You could contribute this page! -->
 <BigValue 
     data={issue_count} 
@@ -32,22 +30,22 @@ In the last <Value data={issue_summary} column="last_hours"/> hours there have b
 />
 
 
+### Issues by hour
 <BarChart
   data={issue_count_hour}
   x="hour_of_day"
   y="issues"
   series="issue_action"
-  title = "Issues by hour"
 />
 
 
 
 
 
+### Issues summary by repo
 <DataTable
   search="true"
   data="{issues_per_repo}"
-  title="Issues per Repository"
   link="issue_repo_url"
   >
   <Column id= "repo_name"/>
