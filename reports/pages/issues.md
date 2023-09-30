@@ -6,6 +6,8 @@ sources:
 
 In the last <Value data={issue_summary} column="last_hours"/> hours there have been <b><Value data={issue_summary} column="issues"/></b> events across <Value data={issue_summary} column="repo_count"/> repositories! This has involved <Value data={issue_summary} column="actor_count"/> contributors opening and closing issues, <Value data={issue_summary} column="opened_events"/> and <Value data={issue_summary} column="closed_events"/> respectively.
 
+<b><Value data={query_name} /></b> was the top actor 
+
 
 <!-- Coming soon! You could contribute this page! -->
 <BigValue 
@@ -69,9 +71,29 @@ select
   date_diff('hour', min(event_created_at)::TIMESTAMPTZ, now()::TIMESTAMPTZ) as last_hours,
   count(1) filter(where issue_action = 'opened')::INT as opened_events,
   count(1) filter(where issue_action = 'closed')::INT as closed_events,
-  from ${issues}
+from ${issues}
 
 ```
+<!-- Actor summary -->
+```sql top_actor
+  select 
+    actor_login, 
+    count(1) as actor_events,
+  from ${issues}
+  group by all
+  order by actor_login
+  limit 1
+```
+
+```sql top_actor_repo
+  select repo_name,
+    count(1) as repo_events
+  from ${issues}
+  where actor_login = (select actor_login from ${top_actor})
+  group by all
+  limit 1
+```
+
 
 ```sql issue_count
   select count(1) as issues,
