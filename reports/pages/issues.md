@@ -128,7 +128,7 @@ from ${issues}
     case 
       when issue_action = 'opened' then 'Opened'
       when issue_action = 'closed' then 'Closed'
-      else 'Unknown'
+      else issue_action
       end as issue_action,
     count(1) as issues,
   from ${issues} 
