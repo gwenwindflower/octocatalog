@@ -4,7 +4,7 @@ sources:
   - issues.sql
 ---
 
-In the last <Value data={issue_summary} column="last_hours"/> hours there have been <b><Value data={issue_summary} column="issues"/></b> events across <Value data={issue_summary} column="repo_count"/> repositories! This has involved <Value data={issue_summary} column="actor_count"/> contributors opening and closing issues, <Value data={issue_summary} column="opened_events"/> and <Value data={issue_summary} column="closed_events"/> respectively.
+In the last <Value data={issue_summary} column="last_hours"/> hours there have been <b><Value data={issue_summary} column="issues" fmt="num0 auto"/></b> events across <Value data={issue_summary} column="repo_count" fmt="num0 auto"/> repositories! This has involved <Value data={issue_summary} column="actor_count" fmt="num0 auto"/> contributors opening and closing issues, <Value data={issue_summary} column="opened_events" fmt="num0 auto"/> and <Value data={issue_summary} column="closed_events" fmt="num0 auto"/> respectively.
 
 <b><Value data={top_actor} /></b> was the top contributor with <b><Value data={top_actor_repo} column="repo_events"/></b> issues added to <b><Value data={top_actor_repo} column="repo_name"/></b> repository!
 
