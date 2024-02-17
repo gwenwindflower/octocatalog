@@ -1,0 +1,13 @@
+black
+boto3
+dbt-metricflow[duckdb]~=0.5.0
+duckdb~=0.10.0
+halo
+isort
+modal
+pre-commit
+requests
+ruff
+sqlfluff-templater-dbt
+sqlfluff
+tqdm
