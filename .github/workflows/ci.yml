@@ -32,7 +32,7 @@ jobs:
       - name: Run T
         run: source .venv/bin/activate && dbt deps && dbt build
       - name: Lint SQL
-        run: sqlfluff lint models --format github-annotation-native
+        run: source .venv/bin/activate && sqlfluff lint models --format github-annotation-native
       - name: Build Evidence
         env:
           EVIDENCE_DATABASE: "duckdb"
