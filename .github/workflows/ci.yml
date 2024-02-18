@@ -19,20 +19,18 @@ jobs:
           node-version: 20.x
       - name: Install uv
         run: python3 -m pip install uv
-      - name: Create virtual environment
-        run: uv venv .venv
-      - name: Activate virtual environment
-        run: source .venv/bin/activate
+      - name: TEMP HACK uv needs a venv
+        run: echo "VIRTUAL_ENV=${PYTHON_ROOT_DIR}" >> $GITHUB_ENV
       - name: Install Python requirements
         run: uv pip install -r requirements.txt
       - name: Install Node requirements
         run: npm install --prefix ./reports
       - name: Run EL
-        run: source .venv/bin/activate && python3 el.py -lc
+        run: python3 el.py -lc
       - name: Run T
-        run: source .venv/bin/activate && dbt deps && dbt build
+        run: dbt deps && dbt build
       - name: Lint SQL
-        run: source .venv/bin/activate && sqlfluff lint models --format github-annotation-native
+        run: sqlfluff lint models --format github-annotation-native
       - name: Build Evidence
         env:
           EVIDENCE_DATABASE: "duckdb"
