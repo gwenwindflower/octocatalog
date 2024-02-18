@@ -1,3 +1,10 @@
+{{
+    config(
+        materialized = 'incremental',
+        unique_key = 'event_id',
+    )
+}}
+
 with
 
 issue_events as (
@@ -6,6 +13,9 @@ issue_events as (
 
     where event_type = 'IssuesEvent'
 
+    {% if is_incremental() %}
+        and stg_events.event_created_at >= coalesce((select max(event_created_at) from {{ this }}), '1900-01-01')
+    {% endif %}
 ),
 
 unnest_json as (

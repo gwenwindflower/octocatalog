@@ -1,13 +1,33 @@
 ---
 title: Analyzing Pull Requests
-queries:
-  - prs_opened_per_hour.sql
 ---
 
-## PRs Opened
+## PRs opened per hour
+
+```sql pr_actions
+
+select distinct pull_request_action from motherduck.pull_requests
+
+```
+
+<Dropdown
+  name="pr_action"
+  data={pr_actions}
+  value=pull_request_action
+/>
+
+```sql prs_acted_on_per_hour
+select
+    date_trunc('hour', event_created_at) as hour_event_at,
+    count(*) as pull_requests_acted_on
+from motherduck.pull_requests
+where pull_request_action = '${inputs.pr_action}'
+group by 1
+order by 2
+```
 
 <AreaChart
-    data={prs_opened_per_hour}
-    x=hour_created_at
-    y=pull_requests_opened
+  data={prs_acted_on_per_hour}
+  x=hour_event_at
+  y=pull_requests_acted_on
 />

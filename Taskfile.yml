@@ -36,6 +36,7 @@ tasks:
       - dbt build --target prod
   bi:
     cmds:
+      - npm run sources --prefix ./reports
       - npm run dev --prefix ./reports
   clean:
     cmds:
