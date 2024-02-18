@@ -17,8 +17,10 @@ jobs:
         uses: actions/setup-node@v4.0.2
         with:
           node-version: 20.x
+      - name: Install uv
+        run: python3 -m pip install uv
       - name: Install Python requirements
-        run: pip install -r requirements.txt
+        run: uv pip install -r requirements.txt
       - name: Install Node requirements
         run: npm install --prefix ./reports
       - name: Run EL
