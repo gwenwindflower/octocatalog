@@ -30,7 +30,7 @@ jobs:
       - name: Run EL
         run: source .venv/bin/activate && python3 el.py -lc
       - name: Run T
-        run: dbt deps && dbt build
+        run: source .venv/bin/activate && dbt deps && dbt build
       - name: Lint SQL
         run: sqlfluff lint models --format github-annotation-native
       - name: Build Evidence
