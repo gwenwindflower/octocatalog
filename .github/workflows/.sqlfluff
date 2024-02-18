@@ -1,0 +1,15 @@
+[sqlfluff]
+dialect = duckdb
+templater = dbt
+
+[sqlfluff:templater:dbt]
+profiles_dir = .
+
+[sqlfluff:indentation]
+tab_space_size = 4
+
+[sqlfluff:rules:capitalisation.keywords]
+capitalisation_policy = lower
+
+[sqlfluff:rules:convention.select_trailing_comma]
+select_clause_trailing_comma = require
