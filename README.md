@@ -124,6 +124,8 @@ _This functionality is still cooking!_
 
 If you're comfortable with S3 and want to pull a larger amount of data, we've got you covered there as well. The `el-modal.py` script leverages the incredible Modal platform to pull data and upload it to S3 in parallelized, performant cloud containers. It works pretty much like the regular `el.py` script, you supply it with start and end datetime string in `'YYYY-MM-DD-HH'` format, and it goes to town. Modal currently gives you $30 of free credits a month, which is more than enough to pull quite a bit of data.
 
+> [!NOTE] > **S3? Yes, Please**. S3 (Simple Storage Service) is a cloud storage service from Amazon Web Services. It's a very popular choice for data storage and is used by many data warehouses, including MotherDuck. It's a great place to store large amounts of data, and it's very cheap. It's also very easy to use, and you can access it from the command line with the AWS CLI, or from Python with the `boto3` package. It uses "buckets" to store more or less anything, which you can then configure to allow varying levels of access. AWS can be intimidating to get started with, so we'll include a more detailed walkthrough when this is ready.
+
 ### 👟 Task runner 🏃🏻‍♀️
 
 There are some basic tasks included using my preferred task runner [Task](https://taskfile.dev/#/). This is optional for your convenience, you can also [run the `el.py` script directly with Python](#-running-the-el-script-directly-). You can install it with most package managers:
@@ -221,10 +223,17 @@ Evidence is an open-source, code-first BI platform. It integrates beautifully wi
 
 ```shell
 npm install --prefix ./reports # install the dependencies
+npm run sources --prefix ./reports # build fresh data from the sources
 npm run dev --prefix ./reports # run the development server
 ```
 
 > [!NOTE] > **The heck is npm??** Node Package Manager or npm is the standard package manager for JavaScript and its typed superset TypeScript. Evidence is a JavaScript project, so we use npm to install its dependencies and run the development server. You can [learn more here](https://www.npmjs.com/get-npm). An important note is that JS/TS projects generally have a `package.json` file that lists the dependencies for the project as well as scripts for building and running development servers and such. This is similar to the `requirements.txt` file for Python projects, but more full featured. npm (and its cousins pnpm, npx, yarn, and bun) won't require a virtual environment, they just now to be scoped to the directory. They've really got things figured out over in JS land.
+
+### 📊 Developing pages for Evidence ⚡
+
+Evidence uses Markdown and SQL to create beautiful data products. It's powerful and simple, focusing on what matters: the _information_. You can add and edit markdown pages in the `./reports/pages/` directory, and SQL queries those pages can reference in the `./reports/queries/` directory. You can also put queries inline in the Markdown files inside of code fences, although stylistically this project prefers queries go in SQL files in the `queries` directory for reusability and clarity. Because Evidence uses a WASM DuckDB implementation to make pages dynamic, you can even chain queries together, referencing other queries as the input to your new query. We recommend you utilize this to keep queries tight and super readable. CTEs in the BI section's queries are a sign that you might want to chunk your query up into a chain for flexibility and clarity. Sources point to the raw tables, either in your local DuckDB database file or in MotherDuck if you're running prod mode. You add a `select * [model]` query to the `./reports/sources/` directory and re-run `npm run sources --prefix ./reports` and you're good to go.
+
+Evidence's dev server uses hot reloading, so you can see your changes in real time as you develop. It's a really neat tool, and I'm excited to see what you build with it.
 
 ---
 
