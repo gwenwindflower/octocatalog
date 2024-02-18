@@ -25,6 +25,8 @@ jobs:
         run: source .venv/bin/activate
       - name: Install Python requirements
         run: uv pip install -r requirements.txt
+      - name: Re-activate virtual environment
+        run: source .venv/bin/activate
       - name: Install Node requirements
         run: npm install --prefix ./reports
       - name: Run EL
