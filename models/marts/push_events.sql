@@ -11,10 +11,13 @@ push_events as (
 
     select *, from {{ ref('stg_events') }}
 
-    where event_type in ('PushEvent')
+    where
+        event_type in ('PushEvent')
 
     {% if is_incremental() %}
-        and stg_events.event_created_at >= coalesce((select max(event_created_at) from {{ this }}), '1900-01-01')
+        and stg_events.event_created_at >= coalesce(
+            (select max(event_created_at), from {{ this }}), '1900-01-01'
+        )
     {% endif %}
 ),
 

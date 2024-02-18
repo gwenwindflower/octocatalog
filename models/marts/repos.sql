@@ -10,11 +10,13 @@ with
 distill_repos_from_events as (
 
     select
-        {{ dbt_utils.generate_surrogate_key([
-            'repo_id',
-            'repo_name',
-            'repo_url'
-        ]) }} as repo_state_uuid,
+        {{
+            dbt_utils.generate_surrogate_key([
+                'repo_id',
+                'repo_name',
+                'repo_url'
+            ])
+        }} as repo_state_uuid,
         repo_id,
         repo_name,
         repo_url,
@@ -22,10 +24,13 @@ distill_repos_from_events as (
 
     from {{ ref('stg_events') }}
 
-    where true
+    where
+        true
 
     {% if is_incremental() %}
-        and stg_events.event_created_at >= coalesce((select max(updated_at) from {{ this }}), '1900-01-01')
+        and stg_events.event_created_at >= coalesce(
+            (select max(updated_at), from {{ this }}), '1900-01-01'
+        )
     {% endif %}
 
     group by all
@@ -38,11 +43,11 @@ rank_most_recent_repo_state as (
         repo_id,
         repo_name,
         repo_url,
+        repo_state_last_seen_at as updated_at,
         row_number() over (
             partition by repo_id
             order by repo_state_last_seen_at desc
         ) as repo_recency_rank,
-        repo_state_last_seen_at as updated_at,
 
     from distill_repos_from_events
 
@@ -54,7 +59,7 @@ pull_most_recent_repo_state as (
         repo_id,
         repo_name,
         repo_url,
-        updated_at
+        updated_at,
 
     from rank_most_recent_repo_state
 
