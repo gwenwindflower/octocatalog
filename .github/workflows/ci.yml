@@ -19,6 +19,10 @@ jobs:
           node-version: 20.x
       - name: Install uv
         run: python3 -m pip install uv
+      - name: Create virtual environment
+        run: uv venv .venv
+      - name: Activate virtual environment
+        run: source .venv/bin/activate
       - name: Install Python requirements
         run: uv pip install -r requirements.txt
       - name: Install Node requirements
