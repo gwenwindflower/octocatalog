@@ -8,17 +8,19 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.1.0
+        uses: actions/checkout@v4.1.1
       - name: Setup Python
-        uses: actions/setup-python@v4.7.0
+        uses: actions/setup-python@v5.0.0
         with:
           python-version: "3.11.x"
       - name: Setup Node
-        uses: actions/setup-node@v3.8.1
+        uses: actions/setup-node@v4.0.2
         with:
           node-version: 20.x
+      - name: Install uv
+        run: python3 -m pip install uv
       - name: Install Python requirements
-        run: python3 -m pip install -r requirements.txt
+        run: uv pip install -r requirements.txt
       - name: Install Node requirements
         run: npm install --prefix ./reports
       - name: Run EL
@@ -29,6 +31,6 @@ jobs:
         run: sqlfluff lint models --format github-annotation-native
       - name: Build Evidence
         env:
-          EVIDENCE_DATABASE: 'duckdb'
-          EVIDENCE_DUCKDB_FILENAME: 'octocatalog.db'
+          EVIDENCE_DATABASE: "duckdb"
+          EVIDENCE_DUCKDB_FILENAME: "octocatalog.db"
         run: npm run sources && npm run build --prefix ./reports
