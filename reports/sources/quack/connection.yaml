@@ -1,0 +1,5 @@
+# This file was automatically generated
+name: quack
+type: duckdb
+options:
+  filename: ../../octocatalog.db

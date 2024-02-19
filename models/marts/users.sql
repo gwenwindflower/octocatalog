@@ -1,3 +1,10 @@
+{{
+    config(
+        materialized = 'incremental',
+        unique_key = 'actor_id',
+    )
+}}
+
 with
 
 distill_user_states_from_events as (
@@ -23,6 +30,15 @@ distill_user_states_from_events as (
 
     from {{ ref('stg_events') }}
 
+    where
+        true
+
+        {% if is_incremental() %}
+            and event_created_at >= coalesce(
+                (select max(updated_at), from {{ this }}), '1900-01-01'
+            )
+        {% endif %}
+
     group by all
 
 ),
@@ -36,6 +52,7 @@ rank_user_state_recency as (
         actor_display_login,
         actor_url,
         actor_avatar_url,
+        user_state_last_seen_at as updated_at,
         row_number() over (
             partition by actor_id
             order by user_state_last_seen_at desc
@@ -54,6 +71,7 @@ pull_most_recent_user_state as (
         actor_display_login,
         actor_url,
         actor_avatar_url,
+        updated_at,
 
     from rank_user_state_recency
 

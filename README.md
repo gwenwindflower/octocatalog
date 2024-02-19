@@ -17,8 +17,7 @@ It runs completely local or inside of a devcontainer, but can also run on [Mothe
 
 Most of the below setup will be done for you automatically if you choose one of the devcontainer options above, so feel free to skip to the [Extract and Load](#-extract-and-load-) section if you're using one of those. Please note that while devcontainers are very neat and probably the future, they also add some mental overhead and complexity at their present stage of development that somewhat offsets the ease of use and reproducibility they bring to the table. I personally prefer local development still for most things.
 
-> [!NOTE]
-> **What's with the name?** GitHub's mascot is the [octocat](https://octodex.github.com/), and this project is a catalog of GitHub data. The octocat absolutely rules, I love them, I love puns, I love data, and here we are.
+> [!NOTE] > **What's with the name?** GitHub's mascot is the [octocat](https://octodex.github.com/), and this project is a catalog of GitHub data. The octocat absolutely rules, I love them, I love puns, I love data, and here we are.
 
 ![kim was right](https://github.com/gwenwindflower/octocatalog/assets/91998347/adb3fb70-c666-4d54-9e0c-86600692603b)
 
@@ -29,8 +28,10 @@ There are a few steps to get started with this project if you want to develop lo
 1. [Clone the project locally](#-clone-the-project-locally-).
 2. [Set up Python, then install the dependencies and other tooling](#-python-).
 3. [Extract and load the data locally](#-extract-and-load-).
-5. [Transform the data with dbt](#%EF%B8%8F-transform-the-data-with-dbt-).
-6. [Build the BI platform with Evidence](#-build-the-bi-platform-with-evidence-).
+4. [Transform the data with dbt](#%EF%B8%8F-transform-the-data-with-dbt-).
+5. [Build the BI platform with Evidence](#-build-the-bi-platform-with-evidence-).
+
+> [!NOTE] 😎 **uv** There's a new kid on the block! `uv` is (for now) a Python package manager that aims to grow into a complete Python tooling system. It's from the makers of `ruff`, the very, very fast linter this here project uses. It's still in early development, but it's really impressive, I use it personally instead of `pip` now. You can [install it here](https://github.com/astral-sh/uv) and get going with this project a bit faster (at least less time waiting on `pip`). In my experience so far it works best as a global tool, so we don't install it in your .venv, we don't require it, and this guide will use `pip` for the time being, but I except that to change soon.
 
 ### 🤖 Setup script 🏎️
 
@@ -40,19 +41,20 @@ We encourage to to run the setup steps for the sake of understanding them more d
 
 #### Use the GitHub CLI (Easier for beginners)
 
-1. [Install the GitHub CLI.](https://cli.github.com/) 
+1. [Install the GitHub CLI.](https://cli.github.com/)
 2. `cd path/to/where/you/keep/projects`
 3. `gh repo clone gwenwindflower/octocatalog`
 4. `cd octocatalog`
 5. Next steps!
 
 #### Clone via SSH (More standard but a bit more involved)
+
 1. Set up SSH keys for GitHub.
 2. Grab the SSH link from the green `Code` button in the top-right of the repo. It will be under Local > SSH.
-4. `cd path/to/where/you/keep/projects`
-5. `git clone [ssh-link-you-copied]`
-6. `cd octocatalog`
-7. Next steps!
+3. `cd path/to/where/you/keep/projects`
+4. `git clone [ssh-link-you-copied]`
+5. `cd octocatalog`
+6. Next steps!
 
 ### 🐍 Python 💻
 
@@ -72,8 +74,7 @@ Once you have python installed you'll want to set up a virtual environment in th
 python -m venv .venv
 ```
 
-> [!NOTE]
-> **What's this `-m` business?** The `-m` stands for module and tells python to run the `venv` module as a script. It's a good practice to do this with `pip` as well, like `python -m pip install [package]` to ensure you're using the right version of pip for the python interpret you're calling. You can run any available python module as a script this way, though it's most commonly used with standard library modules like `venv` and `pip`.
+> [!NOTE] > **What's this `-m` business?** The `-m` stands for module and tells python to run the `venv` module as a script. It's a good practice to do this with `pip` as well, like `python -m pip install [package]` to ensure you're using the right version of pip for the python interpret you're calling. You can run any available python module as a script this way, though it's most commonly used with standard library modules like `venv` and `pip`.
 
 Once we've got a Python virtual environment set up we'll need to activate it. You can do this with:
 
@@ -81,8 +82,7 @@ Once we've got a Python virtual environment set up we'll need to activate it. Yo
 source .venv/bin/activate
 ```
 
-> [!NOTE]
-> **`source` what now?** This may seem magical and complex, "virtual environments" sounds like some futuristic terminology from Blade Runner, but it's actually pretty simple. You have an important environment variable on your machine called `PATH`. It specifices a list of directories that should be looked through, in order of priority, when you call a command like `ls` or `python` or `dbt`. The first match your computer gets it will run that command. What the `activate` script does is make sure the virtual environment folder we just created gets put at the front of that list. This means that when you run `python` or `dbt` or `pip` it will look in the virtual environment folder first, and if it finds a match it will run that. This is how we can install specific versions of packages like `dbt` and `duckdb` into our project and not have to worry about them conflicting with other versions of those packages in other projects.
+> [!NOTE] > **`source` what now?** This may seem magical and complex, "virtual environments" sounds like some futuristic terminology from Blade Runner, but it's actually pretty simple. You have an important environment variable on your machine called `PATH`. It specifices a list of directories that should be looked through, in order of priority, when you call a command like `ls` or `python` or `dbt`. The first match your computer gets it will run that command. What the `activate` script does is make sure the virtual environment folder we just created gets put at the front of that list. This means that when you run `python` or `dbt` or `pip` it will look in the virtual environment folder first, and if it finds a match it will run that. This is how we can install specific versions of packages like `dbt` and `duckdb` into our project and not have to worry about them conflicting with other versions of those packages in other projects.
 
 Now that we're in an isolated virtual environment we can install the dependencies for this project. You can do this with:
 
@@ -90,8 +90,7 @@ Now that we're in an isolated virtual environment we can install the dependencie
 python -m pip install -r requirements.txt
 ```
 
-> [!NOTE]
-> **`-r` u kidding me?** Last thing I promise! The `-r` flag tells `pip` to install all the packages listed in the file that follows it. In this case we're telling pip to install all the packages listed in the `requirements.txt` file. This is a common pattern in Python projects, and you'll see it a lot.
+> [!NOTE] > **`-r` u kidding me?** Last thing I promise! The `-r` flag tells `pip` to install all the packages listed in the file that follows it. In this case we're telling pip to install all the packages listed in the `requirements.txt` file. This is a common pattern in Python projects, and you'll see it a lot.
 
 #### Putting it all together
 
@@ -109,7 +108,7 @@ This project used [pre-commit](https://pre-commit.com/) to run basic checks for 
 
 ## 🦆 Extract and Load 📥
 
-Extract and load is the process of taking data from one source, like an API, and loading it into another source, typically a data warehouse. In our case our source is the GitHub Archive, and our load targets are either: local, [MotherDuck](https://motherduck.com/), or [S3](https://en.wikipedia.org/wiki/Amazon_S3).
+Extract and load is the process of taking data from one source, like an API, and loading it into another source, typically a data warehouse. In our case our source is the GitHub Archive, and our load targets are either: local, [MotherDuck](https://motherduck.com/), or (soon [S3](https://en.wikipedia.org/wiki/Amazon_S3)).
 
 ### 💻 Local usage 💾
 
@@ -117,12 +116,15 @@ You've go two options here: you can [run the `el` scripts directly](#-running-th
 
 If you run the script directly, it takes two arguments: a start and end datetime string, both formatted as `'YYYY-MM-DD-HH'`. It is inclusive of both, so for example running `python el.py '2023-09-01-01' '2023-09-01-02'` will load _two_ hours: 1am and 2am on September 9th 2023. Pass the same argument for both to pull just that hour.
 
-> [!NOTE]
-> **Careful of data size**. DuckDB is an in-process database engine, which means it runs primarily in memory. This is great for speed and ease of use, but it also means that it's (somewhat) limited by the amount of memory on your machine. The GitHub Archive data is event data that stretches back years, so is very large, and you'll likely run into memory issues if you try to load more than a few days of data at a time. We recommend using a single hour locally when developing. When you want to go bigger for production use you'll probably want to leverage the option below.
+> [!NOTE] > **Careful of data size**. DuckDB is an in-process database engine, which means it runs primarily in memory. This is great for speed and ease of use, but it also means that it's (somewhat) limited by the amount of memory on your machine. The GitHub Archive data is event data that stretches back years, so is very large, and you'll likely run into memory issues if you try to load more than a few days of data at a time. We recommend using a single hour locally when developing. When you want to go bigger for production use you'll probably want to leverage the option below.
 
-### ☁️ Bulk load the data 🚚
+### ☁️ _Coming soon!_ Bulk load the data 🚚
 
-If you're comfortable with S3 and want to pull a larger amount of data, we've got you covered there as well. The `el-modal.py` script leverages the incredible Modal platform to pull data and upload it to S3 in parallelized, performant cloud containers. It works pretty much like the regular `el.py` script, you supply it with start and end datetime string in `'YYYY-MM-DD-HH'` format, and it goes to town. Modal currently gives you $30 of free credits a month, which is more than enough to pull quite a bit of data. 
+_This functionality is still cooking!_
+
+If you're comfortable with S3 and want to pull a larger amount of data, we've got you covered there as well. The `el-modal.py` script leverages the incredible Modal platform to pull data and upload it to S3 in parallelized, performant cloud containers. It works pretty much like the regular `el.py` script, you supply it with start and end datetime string in `'YYYY-MM-DD-HH'` format, and it goes to town. Modal currently gives you $30 of free credits a month, which is more than enough to pull quite a bit of data.
+
+> [!NOTE] > **S3? Yes, Please**. S3 (Simple Storage Service) is a cloud storage service from Amazon Web Services. It's a very popular choice for data storage and is used by many data warehouses, including MotherDuck. It's a great place to store large amounts of data, and it's very cheap. It's also very easy to use, and you can access it from the command line with the AWS CLI, or from Python with the `boto3` package. It uses "buckets" to store more or less anything, which you can then configure to allow varying levels of access. AWS can be intimidating to get started with, so we'll include a more detailed walkthrough when this is ready.
 
 ### 👟 Task runner 🏃🏻‍♀️
 
@@ -174,7 +176,7 @@ Tasks included are:
 
 | Task             | Description                                                                |
 | ---------------- | -------------------------------------------------------------------------- |
-| `task setup`     | sets up up all required tools to run the stack                              |
+| `task setup`     | sets up up all required tools to run the stack                             |
 | `task extract`   | pull data from github archive for the past day into the data/ directory    |
 | `task load`      | load data from the data/ directory into duckdb                             |
 | `task transform` | run the dbt transformations                                                |
@@ -221,11 +223,17 @@ Evidence is an open-source, code-first BI platform. It integrates beautifully wi
 
 ```shell
 npm install --prefix ./reports # install the dependencies
+npm run sources --prefix ./reports # build fresh data from the sources
 npm run dev --prefix ./reports # run the development server
 ```
 
->[!NOTE]
-> **The heck is npm??** Node Package Manager or npm is the standard package manager for JavaScript and its typed superset TypeScript. Evidence is a JavaScript project, so we use npm to install its dependencies and run the development server. You can [learn more here](https://www.npmjs.com/get-npm). An important note is that JS/TS projects generally have a `package.json` file that lists the dependencies for the project as well as scripts for building and running development servers and such. This is similar to the `requirements.txt` file for Python projects, but more full featured. npm (and its cousins pnpm, npx, yarn, and bun) won't require a virtual environment, they just now to be scoped to the directory. They've really got things figured out over in JS land.
+> [!NOTE] > **The heck is npm??** Node Package Manager or npm is the standard package manager for JavaScript and its typed superset TypeScript. Evidence is a JavaScript project, so we use npm to install its dependencies and run the development server. You can [learn more here](https://www.npmjs.com/get-npm). An important note is that JS/TS projects generally have a `package.json` file that lists the dependencies for the project as well as scripts for building and running development servers and such. This is similar to the `requirements.txt` file for Python projects, but more full featured. npm (and its cousins pnpm, npx, yarn, and bun) won't require a virtual environment, they just now to be scoped to the directory. They've really got things figured out over in JS land.
+
+### 📊 Developing pages for Evidence ⚡
+
+Evidence uses Markdown and SQL to create beautiful data products. It's powerful and simple, focusing on what matters: the _information_. You can add and edit markdown pages in the `./reports/pages/` directory, and SQL queries those pages can reference in the `./reports/queries/` directory. You can also put queries inline in the Markdown files inside of code fences, although stylistically this project prefers queries go in SQL files in the `queries` directory for reusability and clarity. Because Evidence uses a WASM DuckDB implementation to make pages dynamic, you can even chain queries together, referencing other queries as the input to your new query. We recommend you utilize this to keep queries tight and super readable. CTEs in the BI section's queries are a sign that you might want to chunk your query up into a chain for flexibility and clarity. Sources point to the raw tables, either in your local DuckDB database file or in MotherDuck if you're running prod mode. You add a `select * [model]` query to the `./reports/sources/` directory and re-run `npm run sources --prefix ./reports` and you're good to go.
+
+Evidence's dev server uses hot reloading, so you can see your changes in real time as you develop. It's a really neat tool, and I'm excited to see what you build with it.
 
 ---
 

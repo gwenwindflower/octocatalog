@@ -1,11 +1,24 @@
+{{
+    config(
+        materialized = 'incremental',
+        unique_key = 'event_id',
+    )
+}}
+
 with
 
 pull_request_events as (
 
     select *, from {{ ref('stg_events') }}
 
-    where event_type = 'PullRequestEvent'
+    where
+        event_type = 'PullRequestEvent'
 
+        {% if is_incremental() %}
+            and event_created_at >= coalesce(
+                (select max(event_created_at), from {{ this }}), '1900-01-01'
+            )
+        {% endif %}
 ),
 
 unnest_json as (

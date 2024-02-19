@@ -1,10 +1,24 @@
+{{
+    config(
+        materialized = 'incremental',
+        unique_key = 'event_id',
+    )
+}}
+
 with
 
 issue_events as (
 
     select *, from {{ ref('stg_events') }}
 
-    where event_type = 'IssuesEvent'
+    where
+        event_type = 'IssuesEvent'
+
+        {% if is_incremental() %}
+            and event_created_at >= coalesce(
+                (select max(event_created_at), from {{ this }}), '1900-01-01'
+            )
+        {% endif %}
 
 ),
 

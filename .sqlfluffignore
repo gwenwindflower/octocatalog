@@ -1,3 +1,6 @@
 target/
 dbt_packages/
 macros/
+.venv
+reports/
+generate_fixtures.sql
