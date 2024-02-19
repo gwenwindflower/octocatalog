@@ -23,11 +23,10 @@ jobs:
         run: npm install --prefix ./reports
       - name: Run EL
         run: python3 el.py -lc
-      - name: Run T
-        run: dbt deps && dbt build
       - name: Lint SQL
-        run: sqlfluff lint models --verbose
-
+        run: dbt deps && sqlfluff lint models
+      - name: Build transformations
+        run: dbt deps && dbt build
       - name: Build Evidence
         env:
           EVIDENCE_DATABASE: "duckdb"
