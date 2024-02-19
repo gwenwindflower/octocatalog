@@ -33,11 +33,11 @@ distill_user_states_from_events as (
     where
         true
 
-    {% if is_incremental() %}
-        and stg_events.event_created_at >= coalesce(
-            (select max(updated_at), from {{ this }}), '1900-01-01'
-        )
-    {% endif %}
+        {% if is_incremental() %}
+            and event_created_at >= coalesce(
+                (select max(updated_at), from {{ this }}), '1900-01-01'
+            )
+        {% endif %}
 
     group by all
 

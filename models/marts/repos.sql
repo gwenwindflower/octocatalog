@@ -27,11 +27,11 @@ distill_repos_from_events as (
     where
         true
 
-    {% if is_incremental() %}
-        and stg_events.event_created_at >= coalesce(
-            (select max(updated_at), from {{ this }}), '1900-01-01'
-        )
-    {% endif %}
+        {% if is_incremental() %}
+            and event_created_at >= coalesce(
+                (select max(updated_at), from {{ this }}), '1900-01-01'
+            )
+        {% endif %}
 
     group by all
 
@@ -40,6 +40,7 @@ distill_repos_from_events as (
 rank_most_recent_repo_state as (
 
     select
+        -- we probably should group down to id for repos that change names?
         repo_id,
         repo_name,
         repo_url,
