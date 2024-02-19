@@ -26,7 +26,7 @@ jobs:
       - name: Run T
         run: dbt deps && dbt build
       - name: Lint SQL
-        run: sqlfluff lint models --format github-annotation-native --templater dbt --dialect duckdb
+        run: sqlfluff lint models --verbose
       - name: Build Evidence
         env:
           EVIDENCE_DATABASE: "duckdb"
