@@ -61,7 +61,7 @@ select
   date_diff('hour', min(event_created_at)::TIMESTAMP, now()::TIMESTAMP) as last_hours,
   count(1) filter(where issue_action = 'opened')::INT as opened_events,
   count(1) filter(where issue_action = 'closed')::INT as closed_events,
-from motherduck.issues
+from quack.issues
 
 ```
 
@@ -71,7 +71,7 @@ from motherduck.issues
   select
     actor_login,
     count(1) as actor_events,
-  from motherduck.issues
+  from quack.issues
   group by all
   having actor_events>1
   order by actor_login desc
@@ -81,7 +81,7 @@ from motherduck.issues
 ```sql top_actor_repo
   select repo_name,
     count(1) as repo_events
-  from motherduck.issues
+  from quack.issues
   where actor_login = (select actor_login from ${top_actor})
   group by all
   limit 1
@@ -92,7 +92,7 @@ from motherduck.issues
     left(issue_body, 400) as content_summary,
     issue_body,
     length(issue_body) as issue_body_len,
-  from motherduck.issues
+  from quack.issues
   group by all
   order by issue_body_len desc
   limit 1
@@ -101,7 +101,7 @@ from motherduck.issues
 ```sql issue_count
   select count(1) as issues,
     count(1) - count(1) filter(where issue_created_at < now()::timestamp - interval '1 Day') as count_day_prior,
-  from motherduck.issues
+  from quack.issues
   group by all
 ```
 
@@ -114,7 +114,7 @@ from motherduck.issues
       else issue_action
       end as issue_action,
     count(1) as issues,
-  from motherduck.issues
+  from quack.issues
   group by all
   order by all
 
@@ -128,7 +128,7 @@ select
   count(distinct actor_id) as actors,
   count(1) filter(where issue_action = 'opened') as opened_events,
   count(1) filter(where issue_action = 'closed') as closed_events,
-from motherduck.issues
+from quack.issues
 group by all
 having number_of_issues > 2
 order by 2 desc

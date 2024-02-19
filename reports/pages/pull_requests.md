@@ -6,7 +6,7 @@ title: Analyzing Pull Requests
 
 ```sql pr_actions
 
-select distinct pull_request_action from motherduck.pull_requests
+select distinct pull_request_action from quack.pull_requests
 
 ```
 
@@ -20,7 +20,7 @@ select distinct pull_request_action from motherduck.pull_requests
 select
     date_trunc('hour', event_created_at) as hour_event_at,
     count(*) as pull_requests_acted_on
-from motherduck.pull_requests
+from quack.pull_requests
 where pull_request_action = '${inputs.pr_action}'
 group by 1
 order by 2
