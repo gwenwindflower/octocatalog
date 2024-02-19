@@ -5,6 +5,7 @@ on:
 jobs:
   ci:
     name: CI Check
+    environment: ci
     runs-on: macos-latest
     steps:
       - name: Checkout
