@@ -1,1 +1,1 @@
-select * from main.pull_request_events limit 20000;
+select * from octocatalog.pull_request_events limit 20000;

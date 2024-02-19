@@ -1,1 +1,1 @@
-select * from main.issue_events;
+select * from octocatalog.issue_events;
