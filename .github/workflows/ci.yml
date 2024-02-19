@@ -19,8 +19,6 @@ jobs:
           node-version: 20.x
       - name: Install Python requirements
         run: pip install -r requirements.txt
-      - name: Install Node requirements
-        run: npm install --prefix ./reports
       - name: Run EL
         run: python3 el.py -lc
       - name: Build transformations
@@ -29,4 +27,7 @@ jobs:
           dbt build
           sqlfluff lint models
       - name: Build Evidence
-        run: npm run sources && npm run build --prefix ./reports
+        run: |
+          npm install --prefix ./reports
+          npm run sources --prefix ./reports
+          npm run build --prefix ./reports
