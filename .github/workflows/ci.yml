@@ -2,8 +2,6 @@ on:
   pull_request:
     branches:
       - main
-env:
-  EVIDENCE_SOURCE__quack__filename: ${{ secrets.EVIDENCE_SOURCE__QUACK__FILENAME }}
 
 jobs:
   ci:
