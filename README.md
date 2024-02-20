@@ -17,7 +17,8 @@ It runs completely local or inside of a devcontainer, but can also run on [Mothe
 
 Most of the below setup will be done for you automatically if you choose one of the devcontainer options above, so feel free to skip to the [Extract and Load](#-extract-and-load-) section if you're using one of those. Please note that while devcontainers are very neat and probably the future, they also add some mental overhead and complexity at their present stage of development that somewhat offsets the ease of use and reproducibility they bring to the table. I personally prefer local development still for most things.
 
-> [!NOTE] > **What's with the name?** GitHub's mascot is the [octocat](https://octodex.github.com/), and this project is a catalog of GitHub data. The octocat absolutely rules, I love them, I love puns, I love data, and here we are.
+> [!NOTE]
+> **What's with the name?** GitHub's mascot is the [octocat](https://octodex.github.com/), and this project is a catalog of GitHub data. The octocat absolutely rules, I love them, I love puns, I love data, and here we are.
 
 ![kim was right](https://github.com/gwenwindflower/octocatalog/assets/91998347/adb3fb70-c666-4d54-9e0c-86600692603b)
 
@@ -31,7 +32,8 @@ There are a few steps to get started with this project if you want to develop lo
 4. [Transform the data with dbt](#%EF%B8%8F-transform-the-data-with-dbt-).
 5. [Build the BI platform with Evidence](#-build-the-bi-platform-with-evidence-).
 
-> [!NOTE] 😎 **uv** There's a new kid on the block! `uv` is (for now) a Python package manager that aims to grow into a complete Python tooling system. It's from the makers of `ruff`, the very, very fast linter this here project uses. It's still in early development, but it's really impressive, I use it personally instead of `pip` now. You can [install it here](https://github.com/astral-sh/uv) and get going with this project a bit faster (at least less time waiting on `pip`). In my experience so far it works best as a global tool, so we don't install it in your .venv, we don't require it, and this guide will use `pip` for the time being, but I except that to change soon.
+> [!NOTE]
+> 😎 **uv** There's a new kid on the block! `uv` is (for now) a Python package manager that aims to grow into a complete Python tooling system. It's from the makers of `ruff`, the very, very fast linter this here project uses. It's still in early development, but it's really impressive, I use it personally instead of `pip` now. You can [install it here](https://github.com/astral-sh/uv) and get going with this project a bit faster (at least less time waiting on `pip`). In my experience so far it works best as a global tool, so we don't install it in your .venv, we don't require it, and this guide will use `pip` for the time being, but I except that to change soon.
 
 ### 🤖 Setup script 🏎️
 
@@ -74,7 +76,8 @@ Once you have python installed you'll want to set up a virtual environment in th
 python -m venv .venv
 ```
 
-> [!NOTE] > **What's this `-m` business?** The `-m` stands for module and tells python to run the `venv` module as a script. It's a good practice to do this with `pip` as well, like `python -m pip install [package]` to ensure you're using the right version of pip for the python interpret you're calling. You can run any available python module as a script this way, though it's most commonly used with standard library modules like `venv` and `pip`.
+> [!NOTE]
+> **What's this `-m` business?** The `-m` stands for module and tells python to run the `venv` module as a script. It's a good practice to do this with `pip` as well, like `python -m pip install [package]` to ensure you're using the right version of pip for the python interpret you're calling. You can run any available python module as a script this way, though it's most commonly used with standard library modules like `venv` and `pip`.
 
 Once we've got a Python virtual environment set up we'll need to activate it. You can do this with:
 
@@ -82,7 +85,8 @@ Once we've got a Python virtual environment set up we'll need to activate it. Yo
 source .venv/bin/activate
 ```
 
-> [!NOTE] > **`source` what now?** This may seem magical and complex, "virtual environments" sounds like some futuristic terminology from Blade Runner, but it's actually pretty simple. You have an important environment variable on your machine called `PATH`. It specifices a list of directories that should be looked through, in order of priority, when you call a command like `ls` or `python` or `dbt`. The first match your computer gets it will run that command. What the `activate` script does is make sure the virtual environment folder we just created gets put at the front of that list. This means that when you run `python` or `dbt` or `pip` it will look in the virtual environment folder first, and if it finds a match it will run that. This is how we can install specific versions of packages like `dbt` and `duckdb` into our project and not have to worry about them conflicting with other versions of those packages in other projects.
+> [!NOTE]
+> **`source` what now?** This may seem magical and complex, "virtual environments" sounds like some futuristic terminology from Blade Runner, but it's actually pretty simple. You have an important environment variable on your machine called `PATH`. It specifices a list of directories that should be looked through, in order of priority, when you call a command like `ls` or `python` or `dbt`. The first match your computer gets it will run that command. What the `activate` script does is make sure the virtual environment folder we just created gets put at the front of that list. This means that when you run `python` or `dbt` or `pip` it will look in the virtual environment folder first, and if it finds a match it will run that. This is how we can install specific versions of packages like `dbt` and `duckdb` into our project and not have to worry about them conflicting with other versions of those packages in other projects.
 
 Now that we're in an isolated virtual environment we can install the dependencies for this project. You can do this with:
 
@@ -90,7 +94,8 @@ Now that we're in an isolated virtual environment we can install the dependencie
 python -m pip install -r requirements.txt
 ```
 
-> [!NOTE] > **`-r` u kidding me?** Last thing I promise! The `-r` flag tells `pip` to install all the packages listed in the file that follows it. In this case we're telling pip to install all the packages listed in the `requirements.txt` file. This is a common pattern in Python projects, and you'll see it a lot.
+> [!NOTE]
+> **`-r` u kidding me?** Last thing I promise! The `-r` flag tells `pip` to install all the packages listed in the file that follows it. In this case we're telling pip to install all the packages listed in the `requirements.txt` file. This is a common pattern in Python projects, and you'll see it a lot.
 
 #### Putting it all together
 
@@ -116,7 +121,8 @@ You've go two options here: you can [run the `el` scripts directly](#-running-th
 
 If you run the script directly, it takes two arguments: a start and end datetime string, both formatted as `'YYYY-MM-DD-HH'`. It is inclusive of both, so for example running `python el.py '2023-09-01-01' '2023-09-01-02'` will load _two_ hours: 1am and 2am on September 9th 2023. Pass the same argument for both to pull just that hour.
 
-> [!NOTE] > **Careful of data size**. DuckDB is an in-process database engine, which means it runs primarily in memory. This is great for speed and ease of use, but it also means that it's (somewhat) limited by the amount of memory on your machine. The GitHub Archive data is event data that stretches back years, so is very large, and you'll likely run into memory issues if you try to load more than a few days of data at a time. We recommend using a single hour locally when developing. When you want to go bigger for production use you'll probably want to leverage the option below.
+> [!NOTE]
+> **Careful of data size**. DuckDB is an in-process database engine, which means it runs primarily in memory. This is great for speed and ease of use, but it also means that it's (somewhat) limited by the amount of memory on your machine. The GitHub Archive data is event data that stretches back years, so is very large, and you'll likely run into memory issues if you try to load more than a few days of data at a time. We recommend using a single hour locally when developing. When you want to go bigger for production use you'll probably want to leverage the option below.
 
 ### ☁️ _Coming soon!_ Bulk load the data 🚚
 
@@ -124,7 +130,8 @@ _This functionality is still cooking!_
 
 If you're comfortable with S3 and want to pull a larger amount of data, we've got you covered there as well. The `el-modal.py` script leverages the incredible Modal platform to pull data and upload it to S3 in parallelized, performant cloud containers. It works pretty much like the regular `el.py` script, you supply it with start and end datetime string in `'YYYY-MM-DD-HH'` format, and it goes to town. Modal currently gives you $30 of free credits a month, which is more than enough to pull quite a bit of data.
 
-> [!NOTE] > **S3? Yes, Please**. S3 (Simple Storage Service) is a cloud storage service from Amazon Web Services. It's a very popular choice for data storage and is used by many data warehouses, including MotherDuck. It's a great place to store large amounts of data, and it's very cheap. It's also very easy to use, and you can access it from the command line with the AWS CLI, or from Python with the `boto3` package. It uses "buckets" to store more or less anything, which you can then configure to allow varying levels of access. AWS can be intimidating to get started with, so we'll include a more detailed walkthrough when this is ready.
+> [!NOTE]
+> **S3? Yes, Please**. S3 (Simple Storage Service) is a cloud storage service from Amazon Web Services. It's a very popular choice for data storage and is used by many data warehouses, including MotherDuck. It's a great place to store large amounts of data, and it's very cheap. It's also very easy to use, and you can access it from the command line with the AWS CLI, or from Python with the `boto3` package. It uses "buckets" to store more or less anything, which you can then configure to allow varying levels of access. AWS can be intimidating to get started with, so we'll include a more detailed walkthrough when this is ready.
 
 ### 👟 Task runner 🏃🏻‍♀️
 
@@ -227,7 +234,8 @@ npm run sources --prefix ./reports # build fresh data from the sources
 npm run dev --prefix ./reports # run the development server
 ```
 
-> [!NOTE] > **The heck is npm??** Node Package Manager or npm is the standard package manager for JavaScript and its typed superset TypeScript. Evidence is a JavaScript project, so we use npm to install its dependencies and run the development server. You can [learn more here](https://www.npmjs.com/get-npm). An important note is that JS/TS projects generally have a `package.json` file that lists the dependencies for the project as well as scripts for building and running development servers and such. This is similar to the `requirements.txt` file for Python projects, but more full featured. npm (and its cousins pnpm, npx, yarn, and bun) won't require a virtual environment, they just now to be scoped to the directory. They've really got things figured out over in JS land.
+> [!NOTE]
+> **The heck is npm??** Node Package Manager or npm is the standard package manager for JavaScript and its typed superset TypeScript. Evidence is a JavaScript project, so we use npm to install its dependencies and run the development server. You can [learn more here](https://www.npmjs.com/get-npm). An important note is that JS/TS projects generally have a `package.json` file that lists the dependencies for the project as well as scripts for building and running development servers and such. This is similar to the `requirements.txt` file for Python projects, but more full featured. npm (and its cousins pnpm, npx, yarn, and bun) won't require a virtual environment, they just now to be scoped to the directory. They've really got things figured out over in JS land.
 
 ### 📊 Developing pages for Evidence ⚡
 
