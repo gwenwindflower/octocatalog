@@ -109,20 +109,18 @@ python -m pip install -r requirements.txt # Install the dependencies into the vi
 
 > ![NOTE]
 > **`alias` don't fail-ias.** So remember when we talked about aliasing python to python3 above? You can also alias the above three commands in your `.bashrc` or `.zshrc` file, as you'll be using them a lot on this and any other python project. The aliases I use are below:
-
-  ```shell
-  alias python="python3"
-  alias venv="python -m venv .venv"
-  alias va="source .venv/bin/activate"
-  alias venva="venv && va"
-  alias pi="python -m pip"
-  alias pir="python -m pip install -r"
-  alias pirr="python -m pip install -r requirements.txt"
-  alias piup="python -m pip install --upgrade pip"
-  alias vpi="venva && piup && pirr"
-  ```
-
-  Using these or your own take on this can save you significant typing!
+> ```shell
+>  alias python="python3"
+>  alias venv="python -m venv .venv"
+>  alias va="source .venv/bin/activate"
+>  alias venva="venv && va"
+>  alias pi="python -m pip"
+>  alias pir="python -m pip install -r"
+>  alias pirr="python -m pip install -r requirements.txt"
+>  alias piup="python -m pip install --upgrade pip"
+>  alias vpi="venva && piup && pirr"
+>  ```
+> Using these or your own take on this can save you significant typing!
 
 ### Pre-commit
 
