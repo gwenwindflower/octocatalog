@@ -33,7 +33,7 @@ There are a few steps to get started with this project if you want to develop lo
 5. [Build the BI platform with Evidence](#-build-the-bi-platform-with-evidence-).
 
 > [!NOTE]
-> 😎 **uv** There's a new kid on the block! `uv` is (for now) a Python package manager that aims to grow into a complete Python tooling system. It's from the makers of `ruff`, the very, very fast linter this here project uses. It's still in early development, but it's really impressive, I use it personally instead of `pip` now. You can [install it here](https://github.com/astral-sh/uv) and get going with this project a bit faster (at least less time waiting on `pip`). In my experience so far it works best as a global tool, so we don't install it in your .venv, we don't require it, and this guide will use `pip` for the time being, but I except that to change soon.
+> 😎 **uv** There's a new kid on the block! `uv` is (for now) a Python package manager that aims to grow into a complete Python tooling system. It's from the makers of `ruff`, the very, very fast linter this here project uses. It's still in early development, but it's really impressive, I use it personally instead of `pip` now. You can [install it here](https://github.com/astral-sh/uv) and get going with this project a bit faster (at least less time waiting on `pip`). In my experience so far it works best as a global tool, so we don't install it in your .venv, we don't require it, and this guide will use `pip` for the time being, but I except that to change soon. We actually use it in CI for this project, so you can see it in action there.If you're interested you can `brew install uv` and use it for the Python setup steps below.
 
 ### 🤖 Setup script 🏎️
 
@@ -107,6 +107,21 @@ source .venv/bin/activate # Activate the virtual environment
 python -m pip install -r requirements.txt # Install the dependencies into the virtual environment
 ```
 
+> [!NOTE]
+> **`alias` don't fail-ias.** So remember when we talked about aliasing python to python3 above? You can also alias the above three commands in your `.bashrc` or `.zshrc` file, as you'll be using them a lot on this and any other python project. The aliases I use are below:
+> ```shell
+>  alias python="python3"
+>  alias venv="python -m venv .venv"
+>  alias va="source .venv/bin/activate"
+>  alias venva="venv && va"
+>  alias pi="python -m pip"
+>  alias pir="python -m pip install -r"
+>  alias pirr="python -m pip install -r requirements.txt"
+>  alias piup="python -m pip install --upgrade pip"
+>  alias vpi="venva && piup && pirr"
+>  ```
+> Using these or your own take on this can save you significant typing!
+
 ### Pre-commit
 
 This project used [pre-commit](https://pre-commit.com/) to run basic checks for structure, style, and consistentcy. It's installed with the Python dependencies, but you'll need to run `pre-commit install` in the virutal environment to install the speciefic hooks defined by the checks in the `.pre-commit-config.yaml`. After that it will run all the checks on each commit automatically.
@@ -145,7 +160,7 @@ There are some basic tasks included using my preferred task runner [Task](https:
 
 ```shell
 brew install go-task
-```
+````
 
 </details>
 <details>
@@ -197,15 +212,15 @@ You can also manually run the `el.py` script with `python3 el.py [args]` to pull
 The args are:
 
 ```shell
-python3 el.py [start_date in YYYY-MM-DD format, defaults to yesterday] [end_date in YYYY-MM-DD format, defaults to today] [-e --extract Run the extract part only] [-l --load Run the load part only] [-p --prod Run in production mode against MotherDuck]
+python el.py [start_date in YYYY-MM-DD format, defaults to yesterday] [end_date in YYYY-MM-DD format, defaults to today] [-e --extract Run the extract part only] [-l --load Run the load part only] [-p --prod Run in production mode against MotherDuck]
 ```
 
 Running the the `el.py` script without an `-e` or `-l` flag is a no-op as all flags default to `false`. Combine the flags to create the commands you want to run. For example:
 
 ```shell
-python3 el.py -e # extract the data for the past day
-python3 el.py -lp # load any data into the production database
-python3 el.py 2023-09-20 2023-09-23 -elp # extract and load 3 days of data into the production database
+python el.py -e # extract the data for the past day
+python el.py -lp # load any data into the production database
+python el.py 2023-09-20 2023-09-23 -elp # extract and load 3 days of data into the production database
 ```
 
 In order for Evidence to work the DuckDB file needs to be built into the `./reports/` directory. If you're looking to access it via the DuckDB CLI you can find it at `./reports/github_archive.db`.
