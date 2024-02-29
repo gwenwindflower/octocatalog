@@ -17,7 +17,8 @@ It runs completely local or inside of a devcontainer, but can also run on [Mothe
 
 Most of the below setup will be done for you automatically if you choose one of the devcontainer options above, so feel free to skip to the [Extract and Load](#-extract-and-load-) section if you're using one of those. Please note that while devcontainers are very neat and probably the future, they also add some mental overhead and complexity at their present stage of development that somewhat offsets the ease of use and reproducibility they bring to the table. I personally prefer local development still for most things.
 
-> [!NOTE] > **What's with the name?** GitHub's mascot is the [octocat](https://octodex.github.com/), and this project is a catalog of GitHub data. The octocat absolutely rules, I love them, I love puns, I love data, and here we are.
+> [!NOTE]
+> **What's with the name?** GitHub's mascot is the [octocat](https://octodex.github.com/), and this project is a catalog of GitHub data. The octocat absolutely rules, I love them, I love puns, I love data, and here we are.
 
 ![kim was right](https://github.com/gwenwindflower/octocatalog/assets/91998347/adb3fb70-c666-4d54-9e0c-86600692603b)
 
@@ -75,7 +76,8 @@ Once you have python installed you'll want to set up a virtual environment in th
 python -m venv .venv
 ```
 
-> [!NOTE] > **What's this `-m` business?** The `-m` stands for module and tells python to run the `venv` module as a script. It's a good practice to do this with `pip` as well, like `python -m pip install [package]` to ensure you're using the right version of pip for the python interpret you're calling. You can run any available python module as a script this way, though it's most commonly used with standard library modules like `venv` and `pip`.
+> [!NOTE]
+> **What's this `-m` business?** The `-m` stands for module and tells python to run the `venv` module as a script. It's a good practice to do this with `pip` as well, like `python -m pip install [package]` to ensure you're using the right version of pip for the python interpret you're calling. You can run any available python module as a script this way, though it's most commonly used with standard library modules like `venv` and `pip`.
 
 Once we've got a Python virtual environment set up we'll need to activate it. You can do this with:
 
@@ -83,7 +85,8 @@ Once we've got a Python virtual environment set up we'll need to activate it. Yo
 source .venv/bin/activate
 ```
 
-> [!NOTE] > **`source` what now?** This may seem magical and complex, "virtual environments" sounds like some futuristic terminology from Blade Runner, but it's actually pretty simple. You have an important environment variable on your machine called `PATH`. It specifices a list of directories that should be looked through, in order of priority, when you call a command like `ls` or `python` or `dbt`. The first match your computer gets it will run that command. What the `activate` script does is make sure the virtual environment folder we just created gets put at the front of that list. This means that when you run `python` or `dbt` or `pip` it will look in the virtual environment folder first, and if it finds a match it will run that. This is how we can install specific versions of packages like `dbt` and `duckdb` into our project and not have to worry about them conflicting with other versions of those packages in other projects.
+> [!NOTE]
+> **`source` what now?** This may seem magical and complex, "virtual environments" sounds like some futuristic terminology from Blade Runner, but it's actually pretty simple. You have an important environment variable on your machine called `PATH`. It specifices a list of directories that should be looked through, in order of priority, when you call a command like `ls` or `python` or `dbt`. The first match your computer gets it will run that command. What the `activate` script does is make sure the virtual environment folder we just created gets put at the front of that list. This means that when you run `python` or `dbt` or `pip` it will look in the virtual environment folder first, and if it finds a match it will run that. This is how we can install specific versions of packages like `dbt` and `duckdb` into our project and not have to worry about them conflicting with other versions of those packages in other projects.
 
 Now that we're in an isolated virtual environment we can install the dependencies for this project. You can do this with:
 
@@ -91,7 +94,8 @@ Now that we're in an isolated virtual environment we can install the dependencie
 python -m pip install -r requirements.txt
 ```
 
-> [!NOTE] > **`-r` u kidding me?** Last thing I promise! The `-r` flag tells `pip` to install all the packages listed in the file that follows it. In this case we're telling pip to install all the packages listed in the `requirements.txt` file. This is a common pattern in Python projects, and you'll see it a lot.
+> [!NOTE]
+> **`-r` u kidding me?** Last thing I promise! The `-r` flag tells `pip` to install all the packages listed in the file that follows it. In this case we're telling pip to install all the packages listed in the `requirements.txt` file. This is a common pattern in Python projects, and you'll see it a lot.
 
 #### Putting it all together
 
@@ -103,23 +107,23 @@ source .venv/bin/activate # Activate the virtual environment
 python -m pip install -r requirements.txt # Install the dependencies into the virtual environment
 ```
 
-> ![NOTE] > **`alias` don't fail-ias.** So remember when we talked about aliasing python to python3 above? You can also alias the above three commands in your `.bashrc` or `.zshrc` file, as you'll be using them a lot on this and any other python project. The aliases I use are below:
+> ![NOTE]
+> **`alias` don't fail-ias.** So remember when we talked about aliasing python to python3 above? You can also alias the above three commands in your `.bashrc` or `.zshrc` file, as you'll be using them a lot on this and any other python project. The aliases I use are below:
 
-```shell
-alias python="python3"
-alias venv="python -m venv .venv"
-alias va="source .venv/bin/activate"
-alias venva="venv && va"
-alias pi="python -m pip"
-alias pir="python -m pip install -r"
-alias pirr="python -m pip install -r requirements.txt"
-alias piup="python -m pip install --upgrade pip"
-alias vpi="venva && piup && pirr"
-```
+  ```shell
+  alias python="python3"
+  alias venv="python -m venv .venv"
+  alias va="source .venv/bin/activate"
+  alias venva="venv && va"
+  alias pi="python -m pip"
+  alias pir="python -m pip install -r"
+  alias pirr="python -m pip install -r requirements.txt"
+  alias piup="python -m pip install --upgrade pip"
+  alias vpi="venva && piup && pirr"
+  ```
 
-Using these or your own take on this can save you significant typing!
+  Using these or your own take on this can save you significant typing!
 
-````shell
 ### Pre-commit
 
 This project used [pre-commit](https://pre-commit.com/) to run basic checks for structure, style, and consistentcy. It's installed with the Python dependencies, but you'll need to run `pre-commit install` in the virutal environment to install the speciefic hooks defined by the checks in the `.pre-commit-config.yaml`. After that it will run all the checks on each commit automatically.
@@ -134,7 +138,8 @@ You've go two options here: you can [run the `el` scripts directly](#-running-th
 
 If you run the script directly, it takes two arguments: a start and end datetime string, both formatted as `'YYYY-MM-DD-HH'`. It is inclusive of both, so for example running `python el.py '2023-09-01-01' '2023-09-01-02'` will load _two_ hours: 1am and 2am on September 9th 2023. Pass the same argument for both to pull just that hour.
 
-> [!NOTE] > **Careful of data size**. DuckDB is an in-process database engine, which means it runs primarily in memory. This is great for speed and ease of use, but it also means that it's (somewhat) limited by the amount of memory on your machine. The GitHub Archive data is event data that stretches back years, so is very large, and you'll likely run into memory issues if you try to load more than a few days of data at a time. We recommend using a single hour locally when developing. When you want to go bigger for production use you'll probably want to leverage the option below.
+> [!NOTE]
+> **Careful of data size**. DuckDB is an in-process database engine, which means it runs primarily in memory. This is great for speed and ease of use, but it also means that it's (somewhat) limited by the amount of memory on your machine. The GitHub Archive data is event data that stretches back years, so is very large, and you'll likely run into memory issues if you try to load more than a few days of data at a time. We recommend using a single hour locally when developing. When you want to go bigger for production use you'll probably want to leverage the option below.
 
 ### ☁️ _Coming soon!_ Bulk load the data 🚚
 
@@ -142,7 +147,8 @@ _This functionality is still cooking!_
 
 If you're comfortable with S3 and want to pull a larger amount of data, we've got you covered there as well. The `el-modal.py` script leverages the incredible Modal platform to pull data and upload it to S3 in parallelized, performant cloud containers. It works pretty much like the regular `el.py` script, you supply it with start and end datetime string in `'YYYY-MM-DD-HH'` format, and it goes to town. Modal currently gives you $30 of free credits a month, which is more than enough to pull quite a bit of data.
 
-> [!NOTE] > **S3? Yes, Please**. S3 (Simple Storage Service) is a cloud storage service from Amazon Web Services. It's a very popular choice for data storage and is used by many data warehouses, including MotherDuck. It's a great place to store large amounts of data, and it's very cheap. It's also very easy to use, and you can access it from the command line with the AWS CLI, or from Python with the `boto3` package. It uses "buckets" to store more or less anything, which you can then configure to allow varying levels of access. AWS can be intimidating to get started with, so we'll include a more detailed walkthrough when this is ready.
+> [!NOTE]
+> **S3? Yes, Please**. S3 (Simple Storage Service) is a cloud storage service from Amazon Web Services. It's a very popular choice for data storage and is used by many data warehouses, including MotherDuck. It's a great place to store large amounts of data, and it's very cheap. It's also very easy to use, and you can access it from the command line with the AWS CLI, or from Python with the `boto3` package. It uses "buckets" to store more or less anything, which you can then configure to allow varying levels of access. AWS can be intimidating to get started with, so we'll include a more detailed walkthrough when this is ready.
 
 ### 👟 Task runner 🏃🏻‍♀️
 
@@ -208,15 +214,15 @@ You can also manually run the `el.py` script with `python3 el.py [args]` to pull
 The args are:
 
 ```shell
-python3 el.py [start_date in YYYY-MM-DD format, defaults to yesterday] [end_date in YYYY-MM-DD format, defaults to today] [-e --extract Run the extract part only] [-l --load Run the load part only] [-p --prod Run in production mode against MotherDuck]
+python el.py [start_date in YYYY-MM-DD format, defaults to yesterday] [end_date in YYYY-MM-DD format, defaults to today] [-e --extract Run the extract part only] [-l --load Run the load part only] [-p --prod Run in production mode against MotherDuck]
 ```
 
 Running the the `el.py` script without an `-e` or `-l` flag is a no-op as all flags default to `false`. Combine the flags to create the commands you want to run. For example:
 
 ```shell
-python3 el.py -e # extract the data for the past day
-python3 el.py -lp # load any data into the production database
-python3 el.py 2023-09-20 2023-09-23 -elp # extract and load 3 days of data into the production database
+python el.py -e # extract the data for the past day
+python el.py -lp # load any data into the production database
+python el.py 2023-09-20 2023-09-23 -elp # extract and load 3 days of data into the production database
 ```
 
 In order for Evidence to work the DuckDB file needs to be built into the `./reports/` directory. If you're looking to access it via the DuckDB CLI you can find it at `./reports/github_archive.db`.
@@ -245,7 +251,8 @@ npm run sources --prefix ./reports # build fresh data from the sources
 npm run dev --prefix ./reports # run the development server
 ```
 
-> [!NOTE] > **The heck is npm??** Node Package Manager or npm is the standard package manager for JavaScript and its typed superset TypeScript. Evidence is a JavaScript project, so we use npm to install its dependencies and run the development server. You can [learn more here](https://www.npmjs.com/get-npm). An important note is that JS/TS projects generally have a `package.json` file that lists the dependencies for the project as well as scripts for building and running development servers and such. This is similar to the `requirements.txt` file for Python projects, but more full featured. npm (and its cousins pnpm, npx, yarn, and bun) won't require a virtual environment, they just now to be scoped to the directory. They've really got things figured out over in JS land.
+> [!NOTE]
+> **The heck is npm??** Node Package Manager or npm is the standard package manager for JavaScript and its typed superset TypeScript. Evidence is a JavaScript project, so we use npm to install its dependencies and run the development server. You can [learn more here](https://www.npmjs.com/get-npm). An important note is that JS/TS projects generally have a `package.json` file that lists the dependencies for the project as well as scripts for building and running development servers and such. This is similar to the `requirements.txt` file for Python projects, but more full featured. npm (and its cousins pnpm, npx, yarn, and bun) won't require a virtual environment, they just now to be scoped to the directory. They've really got things figured out over in JS land.
 
 ### 📊 Developing pages for Evidence ⚡
 
