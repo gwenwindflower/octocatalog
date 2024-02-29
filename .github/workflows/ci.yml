@@ -2,11 +2,9 @@ on:
   pull_request:
     branches:
       - main
-
 jobs:
   ci:
     name: CI Check
-    environment: ci
     runs-on: macos-latest
     steps:
       - name: Checkout
@@ -14,21 +12,26 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5.0.0
         with:
-          python-version: "3.11.5"
+          python-version: "3.11.x"
       - name: Setup Node
         uses: actions/setup-node@v4.0.2
         with:
           node-version: 20.x
+      - name: Install uv
+        run: python3 -m pip install uv
       - name: Install Python requirements
-        run: pip install -r requirements.txt
+        run: uv pip install --system -r requirements.txt
       - name: Run EL
         run: python3 el.py -lc
-      - name: Build transformations
+      - name: Run T and Lint
         run: |
           dbt deps
           dbt build
-          sqlfluff lint models
+          sqlfluff lint models --format github-annotation-native
       - name: Build Evidence
+        env:
+          EVIDENCE_DATABASE: "duckdb"
+          EVIDENCE_DUCKDB_FILENAME: "octocatalog.db"
         run: |
           npm install --prefix ./reports
           npm run sources --prefix ./reports
