@@ -21,8 +21,6 @@ jobs:
         run: python3 -m pip install uv
       - name: Install Python requirements
         run: uv pip install --system -r requirements.txt
-      - name: Install Node requirements
-        run: npm install --prefix ./reports
       - name: Run EL
         run: python3 el.py -lc
       - name: Run T and Lint
@@ -34,4 +32,7 @@ jobs:
         env:
           EVIDENCE_DATABASE: "duckdb"
           EVIDENCE_DUCKDB_FILENAME: "octocatalog.db"
-        run: npm run sources && npm run build --prefix ./reports
+        run: |
+          npm install --prefix ./reports
+          npm run sources --prefix ./reports
+          npm run build --prefix ./reports
