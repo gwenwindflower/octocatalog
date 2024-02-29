@@ -107,7 +107,7 @@ source .venv/bin/activate # Activate the virtual environment
 python -m pip install -r requirements.txt # Install the dependencies into the virtual environment
 ```
 
-> ![NOTE]
+> [!NOTE]
 > **`alias` don't fail-ias.** So remember when we talked about aliasing python to python3 above? You can also alias the above three commands in your `.bashrc` or `.zshrc` file, as you'll be using them a lot on this and any other python project. The aliases I use are below:
 > ```shell
 >  alias python="python3"
