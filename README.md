@@ -1,3 +1,15 @@
+# ⚠️ Archive notes
+
+## 🚧 The octocatalog will be back in a new form soon
+
+_**2026-01-22**_: I'm recently back from a long sabbatical, and working on a more lightweight and modular way to do this. Goals of the new project will be specifying a date range from a more self-contained tool that runs across either Modal or Cloudflare Workers, maybe via Daft or something similarly designed to scale up for larger data, that will let you specify how many of the following steps to do:
+
+1. drop the raw data into S3 compatible bucket targets (defaulting to Cloudflare R2)
+2. clean and transform the data into a warehouse target (possibly this is dbt, possibly this is Daft to handle larger, more interesting date ranges without requiring you to run a server overnight)
+3. spin up an analysis tool (a new thing I'm hacking on that is agent-forward)
+
+---
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://github.com/gwenwindflower/octocatalog/assets/91998347/44aa2a7a-ffe0-4f00-aabf-cc524b442c46">
   <source media="(prefers-color-scheme: light)" srcset="https://github.com/gwenwindflower/octocatalog/assets/91998347/32f3af43-7ff9-4185-9601-d53eb2413e98">
